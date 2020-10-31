@@ -28,6 +28,21 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult Settings()
+        {
+            return View();
+        }
+
+        public IActionResult Application()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
