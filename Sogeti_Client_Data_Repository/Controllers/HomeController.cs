@@ -18,6 +18,11 @@ namespace Sogeti_Client_Data_Repository.Controllers
             _logger = logger;
         }
 
+        public IActionResult ClientInfo()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
