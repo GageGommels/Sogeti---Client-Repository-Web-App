@@ -53,6 +53,11 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        public IActionResult Sorting()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
