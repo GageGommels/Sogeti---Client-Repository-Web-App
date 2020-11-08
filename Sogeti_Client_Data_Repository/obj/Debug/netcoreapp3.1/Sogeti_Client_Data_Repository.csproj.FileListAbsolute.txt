@@ -37,3 +37,5 @@ C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Dat
 C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\Application.cshtml.g.cs
 C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
 C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\Settings.cshtml.g.cs
+C:\Users\gomme\source\repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\gomme\source\repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\ClientInfo.cshtml.g.cs

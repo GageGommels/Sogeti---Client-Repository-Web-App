@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gomme\\Source\\Repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj": {}
+    "C:\\Users\\gomme\\source\\repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gomme\\Source\\Repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj": {
+    "C:\\Users\\gomme\\source\\repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gomme\\Source\\Repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj",
+        "projectUniqueName": "C:\\Users\\gomme\\source\\repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj",
         "projectName": "Sogeti_Client_Data_Repository",
-        "projectPath": "C:\\Users\\gomme\\Source\\Repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj",
+        "projectPath": "C:\\Users\\gomme\\source\\repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\Sogeti_Client_Data_Repository.csproj",
         "packagesPath": "C:\\Users\\gomme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gomme\\Source\\Repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\obj\\",
+        "outputPath": "C:\\Users\\gomme\\source\\repos\\Sogeti---Client-Repository-Web-App\\Sogeti_Client_Data_Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
