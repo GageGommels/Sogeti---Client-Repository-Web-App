@@ -11,6 +11,8 @@ namespace Sogeti_Client_Data_Repository.Controllers
 {
     public class HomeController : Controller
     {
+        Database database = new Database();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -36,6 +38,28 @@ namespace Sogeti_Client_Data_Repository.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Login([Bind] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                bool res = database.LoginUser(user);
+                if (res)
+                {
+                    TempData["msg"] = "Login Succesful";
+                    return View("Index");
+                }
+                else
+                {
+                    TempData["msg"] = "Incorrect User Name or Password";
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Settings()
