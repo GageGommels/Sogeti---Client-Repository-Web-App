@@ -34,21 +34,25 @@ namespace Sogeti_Client_Data_Repository.Models
             SqlCommand com = new SqlCommand("Get_Password", con);       //Get_Password is the name of the Stored Procedure
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Username", user.Username);    //@Username is an Input Parameter to the Proc
+            
             SqlParameter password = new SqlParameter();
             password.ParameterName = "@Password";                       //@Password is an Output Parameter to the Proc
             password.SqlDbType = SqlDbType.VarBinary;
             password.Direction = ParameterDirection.Output;
             password.Size = 128;
             com.Parameters.Add(password);
+            
             SqlParameter salt = new SqlParameter();
             salt.ParameterName = "@Salt";                               //@Password is an Output Parameter to the Proc
             salt.SqlDbType = SqlDbType.VarBinary;
             salt.Direction = ParameterDirection.Output;
             salt.Size = 128;
             com.Parameters.Add(salt);
+            
             con.Open();
             int ret = com.ExecuteNonQuery();                            //Execute Proc and capture return value
             con.Close();
+            
             if (ret == -1)                                              //Proc fails to find username return false
                 return false;
 
