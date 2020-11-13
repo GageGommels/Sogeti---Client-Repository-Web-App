@@ -48,6 +48,15 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        public IActionResult ChangePass()
+        {
+            return View();
+        }
+        public IActionResult dataView()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
