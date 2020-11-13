@@ -81,6 +81,14 @@ namespace Sogeti_Client_Data_Repository.Controllers
         {
             return View();
         }
+        public IActionResult dataView()
+        {
+            return View();
+        }
+        public IActionResult changePass()
+        {
+            return View();
+        }
 
         public IActionResult Sorting()
         {
