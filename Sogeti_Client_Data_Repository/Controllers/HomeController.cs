@@ -45,11 +45,11 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login([Bind] User user)
+        public IActionResult Login([Bind] Login login)
         {
             if (ModelState.IsValid)
             {
-                bool res = database.LoginUser(user);
+                bool res = database.LoginUser(login);
                 if (res)
                 {
                     TempData["msg"] = "Login Succesful";

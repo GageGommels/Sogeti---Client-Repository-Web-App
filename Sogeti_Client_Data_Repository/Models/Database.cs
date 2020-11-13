@@ -29,11 +29,11 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
-        public bool LoginUser(User user)
+        public bool LoginUser(Login login)
         {
             SqlCommand com = new SqlCommand("Get_Password", con);       //Get_Password is the name of the Stored Procedure
             com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@Username", user.Username);    //@Username is an Input Parameter to the Proc
+            com.Parameters.AddWithValue("@Username", login.Username);    //@Username is an Input Parameter to the Proc
             
             SqlParameter password = new SqlParameter();
             password.ParameterName = "@Password";                       //@Password is an Output Parameter to the Proc
@@ -58,7 +58,7 @@ namespace Sogeti_Client_Data_Repository.Models
 
             byte[] salted = (byte[])salt.Value;                 
             byte[] hashed = KeyDerivation.Pbkdf2(                       //Hash entered password with SALT from DB
-                password: user.Password,
+                password: login.Password,
                 salt: salted,
                 prf: KeyDerivationPrf.HMACSHA1,
                 iterationCount: 10000,
