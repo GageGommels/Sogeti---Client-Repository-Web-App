@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 using System.Data.SqlClient;
 using System.Data;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
@@ -29,41 +26,81 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
-        public bool LoginUser(Login login)
+        public string LoginUser(Login login)
         {
-            SqlCommand com = new SqlCommand("Get_Password", con);       //Get_Password is the name of the Stored Procedure
+            byte[] pass = Encoding.ASCII.GetBytes(login.Password);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var hashedPass = sha1.ComputeHash(pass);
+            SqlCommand com = new SqlCommand("Check_Password", con);       //Check_Password is the name of the Stored Procedure
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Username", login.Username);    //@Username is an Input Parameter to the Proc
-            
-            SqlParameter password = new SqlParameter();
-            password.ParameterName = "@Password";                       //@Password is an Output Parameter to the Proc
-            password.SqlDbType = SqlDbType.VarBinary;
-            password.Direction = ParameterDirection.Output;
-            password.Size = 128;
-            com.Parameters.Add(password);
-            
-            SqlParameter salt = new SqlParameter();
-            salt.ParameterName = "@Salt";                               //@Password is an Output Parameter to the Proc
-            salt.SqlDbType = SqlDbType.VarBinary;
-            salt.Direction = ParameterDirection.Output;
-            salt.Size = 128;
-            com.Parameters.Add(salt);
-            
-            con.Open();
-            int ret = com.ExecuteNonQuery();                            //Execute Proc and capture return value
-            con.Close();
-            
-            if (ret == -1)                                              //Proc fails to find username return false
-                return false;
+            com.Parameters.AddWithValue("@Password", hashedPass);
 
-            byte[] salted = (byte[])salt.Value;                 
-            byte[] hashed = KeyDerivation.Pbkdf2(                       //Hash entered password with SALT from DB
-                password: login.Password,
-                salt: salted,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 128 / 8);
-            return hashed == (byte[])password.Value;                    //If Password matches returned Password from DB return true
+            SqlParameter LoginResponse = new SqlParameter();
+            LoginResponse.ParameterName = "@ResponseMessage";                       //@Password is an Output Parameter to the Proc
+            LoginResponse.SqlDbType = SqlDbType.VarChar;
+            LoginResponse.Direction = ParameterDirection.Output;
+            LoginResponse.Size = 250;
+            com.Parameters.Add(LoginResponse);
+            
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                return "Login Failed";
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return Convert.ToString(LoginResponse.Value);
+        }
+
+        public string AddUser(Login login)
+        {
+            byte[] pass = Encoding.ASCII.GetBytes(login.Password);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var hashedPass = sha1.ComputeHash(pass);
+            SqlCommand com = new SqlCommand("Insert_User", con);       //Check_Password is the name of the Stored Procedure
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@User_Name", login.Username);    //@Username is an Input Parameter to the Proc
+            com.Parameters.AddWithValue("@Password", hashedPass);
+            com.Parameters.AddWithValue("@First_Name", "Wayne");    
+            com.Parameters.AddWithValue("@Last_Name", "Gacey");
+            com.Parameters.AddWithValue("@Email", "wgacey@gmail.com");   
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+            if (response == 1)
+            {
+                return "USER ADDED";
+            }
+            else
+            {
+                return "USER FAILED TO ADD";
+            }
         }
     }
 }

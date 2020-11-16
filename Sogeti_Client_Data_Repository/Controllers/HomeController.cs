@@ -49,15 +49,15 @@ namespace Sogeti_Client_Data_Repository.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool res = database.LoginUser(login);
-                if (res)
+                string response = database.LoginUser(login);
+                if (response == "Login successful")
                 {
-                    TempData["msg"] = "Login Succesful";
+                    TempData["msg"] = response;
                     return View("Index");
                 }
                 else
                 {
-                    TempData["msg"] = "Incorrect User Name or Password";
+                    TempData["msg"] = response;
                     return View();
                 }
             }
