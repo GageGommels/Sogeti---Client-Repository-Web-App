@@ -7,11 +7,12 @@ using System.Text;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
-    public class Database
+    public class UserLogin
     {
 
         SqlConnection con;
-        public Database()
+        string user; 
+        public UserLogin()
         {
             var config = GetConfiguration();
             con = new SqlConnection(config.GetSection("Data").GetSection("ConnectionString").Value);
@@ -28,6 +29,7 @@ namespace Sogeti_Client_Data_Repository.Models
 
         public string LoginUser(Login login)
         {
+            user = login.Username;
             byte[] pass = Encoding.ASCII.GetBytes(login.Password);
             var sha1 = new SHA1CryptoServiceProvider();
             var hashedPass = sha1.ComputeHash(pass);
@@ -101,6 +103,49 @@ namespace Sogeti_Client_Data_Repository.Models
             {
                 return "USER FAILED TO ADD";
             }
+        }
+
+        public string ChangePassword(ChangePassword change, string user)
+        {
+            if (change.NewPassword != change.NewPasswordRepeated)
+                return "Passwords do not match";
+
+            byte[] pass = Encoding.ASCII.GetBytes(change.Password);
+            byte[] newpass = Encoding.ASCII.GetBytes(change.NewPassword);
+            var sha1 = new SHA1CryptoServiceProvider();
+            var hashedPass = sha1.ComputeHash(pass);
+            var hashedNewPass = sha1.ComputeHash(newpass);
+            SqlCommand com = new SqlCommand("Change_Password", con);       //Check_Password is the name of the Stored Procedure
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Username", user);    //@Username is an Input Parameter to the Proc
+            com.Parameters.AddWithValue("@Password", hashedPass);
+            com.Parameters.AddWithValue("@NewPassword", hashedNewPass);
+
+            SqlParameter LoginResponse = new SqlParameter();
+            LoginResponse.ParameterName = "@ResponseMessage";                       //@Password is an Output Parameter to the Proc
+            LoginResponse.SqlDbType = SqlDbType.VarChar;
+            LoginResponse.Direction = ParameterDirection.Output;
+            LoginResponse.Size = 250;
+            com.Parameters.Add(LoginResponse);
+
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+            finally
+            {
+                con.Close();
+            }
+            
+            return Convert.ToString(LoginResponse.Value);
         }
     }
 }
