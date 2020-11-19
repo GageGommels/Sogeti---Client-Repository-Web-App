@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Sogeti_Client_Data_Repository.Models;
 
@@ -11,7 +12,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
 {
     public class HomeController : Controller
     {
-        Database database = new Database();
+        UserLogin userLogin = new UserLogin();
 
         private readonly ILogger<HomeController> _logger;
 
@@ -49,15 +50,16 @@ namespace Sogeti_Client_Data_Repository.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool res = database.LoginUser(login);
-                if (res)
+                string response = userLogin.LoginUser(login);
+                if (response == "Login successful")
                 {
-                    TempData["msg"] = "Login Succesful";
+                    HttpContext.Session.SetString("user", login.Username);
+                    TempData["msg"] = response;
                     return View("Index");
                 }
                 else
                 {
-                    TempData["msg"] = "Incorrect User Name or Password";
+                    TempData["msg"] = response;
                     return View();
                 }
             }
@@ -88,6 +90,30 @@ namespace Sogeti_Client_Data_Repository.Controllers
         public IActionResult changePass()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult changePass([Bind] ChangePassword change)
+        {
+            if (ModelState.IsValid)
+            {
+                string user = HttpContext.Session.GetString("user");
+                string response = userLogin.ChangePassword(change, user);
+                if (response == "Password Successfully Changed")
+                {
+                    TempData["msg"] = response;
+                    return View("Index");
+                }
+                else
+                {
+                    TempData["msg"] = response;
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Sorting()
