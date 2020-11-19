@@ -86,3 +86,13 @@ C:\Users\Scott\Desktop\Sogeti Repo\Sogeti_Client_Data_Repository\bin\Debug\netco
 C:\Users\Scott\Desktop\Sogeti Repo\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Scott\Desktop\Sogeti Repo\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Scott\Desktop\Sogeti Repo\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Sogeti_Client_Data_Repository.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\changePass.cshtml.g.cs
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\ClientApplications.cshtml.g.cs
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\dataView.cshtml.g.cs
+C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\obj\Debug\netcoreapp3.1\Razor\Views\Home\ForgotPassword.cshtml.g.cs
