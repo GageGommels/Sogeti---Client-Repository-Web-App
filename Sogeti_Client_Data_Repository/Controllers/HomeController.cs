@@ -45,6 +45,10 @@ namespace Sogeti_Client_Data_Repository.Controllers
         {
             return View();
         }
+        public IActionResult addApplication()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Login([Bind] Login login)
         {
@@ -88,6 +92,10 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
         public IActionResult changePass()
+        {
+            return View();
+        }
+        public IActionResult test()
         {
             return View();
         }
