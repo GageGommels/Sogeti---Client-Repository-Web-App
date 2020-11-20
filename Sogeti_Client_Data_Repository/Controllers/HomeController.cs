@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Sogeti_Client_Data_Repository.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Sogeti_Client_Data_Repository.Controllers
 {
     public class HomeController : Controller
     {
         UserLogin userLogin = new UserLogin();
+        CachedTables cachedTables;
 
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            cachedTables = CachedTables.Instance;
         }
 
         public IActionResult ClientInfo()
@@ -63,6 +64,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 }
                 else
                 {
+                    //CachedTables.ContactType.TryGetValue(1, out string value);
                     TempData["msg"] = response;
                     return View();
                 }
