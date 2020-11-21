@@ -4,7 +4,7 @@
 [assembly: global::Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute(typeof(AspNetCore.Views_Home_Application), @"mvc.1.0.view", @"/Views/Home/Application.cshtml")]
 namespace AspNetCore
 {
-    #line hidden
+#line hidden
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,14 +14,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\Views\_ViewImports.cshtml"
-using Sogeti_Client_Data_Repository;
+    using Sogeti_Client_Data_Repository;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\Views\_ViewImports.cshtml"
-using Sogeti_Client_Data_Repository.Models;
+    using Sogeti_Client_Data_Repository.Models;
 
 #line default
 #line hidden
@@ -30,166 +30,179 @@ using Sogeti_Client_Data_Repository.Models;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7837b78baf9c7e7c09fbd68520dfbd81b6f9c317", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Application : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
-        #pragma warning disable 1998
+#pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
 #line 1 "C:\Users\gomme\Source\Repos\Sogeti---Client-Repository-Web-App\Sogeti_Client_Data_Repository\Views\Home\Application.cshtml"
-  
-    ViewData["Title"] = "Application";
+
+            ViewData["Title"] = "Application";
 
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral(@"
-<div class=""container-fluid"">
+            WriteLiteral(@"<div class=""container-fluid"">
     <div class=""row"">
-        <div class=""col-md-12"">
-            <div class=""row"">
-                <div class=""col-md-12"">
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Application Name: Ex Name
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Department: Ex Dept.
-                            </h3>
-                        </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Dept. Manager: Ex. Dept. Manager
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Client: Ex. Clien");
-            WriteLiteral(@"t Name
-                            </h3>
-                        </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Primary BA: Ex. Primary BA
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Technical Contact: Ex. Technical Contact
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=""row"">
-                <div class=""col-md-6"">
-                    <table class=""table table-bordered table-hover"">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Appplication Type
-                                </th>
-                            </tr>
-   ");
-            WriteLiteral(@"                     </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-
-                            <button type=""button"" class=""btn btn-info btn-block"">
-                                Add
-                            </button>
-                        </div>
-                        <");
-            WriteLiteral(@"div class=""col-md-6"">
-
-                            <button type=""button"" class=""btn btn-success btn-block"">
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class=""col-md-6"">
-                    <table class=""table table-bordered table-hover"">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Technologies
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td");
-            WriteLiteral(@">
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-
-                            <button type=""button"" class=""btn btn-info btn-block"">
-                                Add
-                            </button>
-                        </div>
-                        <div class=""col-md-6"">
-
-                ");
-            WriteLiteral(@"            <button type=""button"" class=""btn btn-success btn-block"">
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <table class=""table table-bordered table-hover"">
+        <div class=""col-md-6"">
+            <table class=""table table-hover table-bordered"">
+                <tbody>
+                    <tr>
+                        <td>
+                            Application Name:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""appName"" name=""appName"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Department:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""dept"" name=""dept"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dept. Manager:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""dep");
+            WriteLiteral(@"tMgr"" name=""deptMgr"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class=""col-md-6"">
+            <table class=""table table-hover table-bordered"">
+                <tbody>
+                    <tr>
+                        <td>
+                            Client:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""client"" name=""client"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Primary BA:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""ba"" name=""ba"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tech. Contact:
+               ");
+            WriteLiteral(@"         </td>
+                        <td>
+                            <input type=""text"" id=""contact"" name=""contact"" value=""EXAMPLE"" readonly>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div><br /></div>
+    <div class=""row"">
+        <div class=""col-md-6"">
+            <table class=""table table-bordered table-hover table-sm"">
                 <thead>
                     <tr>
                         <th>
+                            Application Type
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>");
+            WriteLiteral(@"
+                            EXAMPLE
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class=""row"">
+                <div class=""col-md-6"">
+
+                    <button type=""button"" class=""btn btn-sm btn-block btn-info"">
+                        Add
+                    </button>
+                </div>
+                <div class=""col-md-6"">
+
+                    <button type=""button"" class=""btn btn-success btn-sm btn-block"">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class=""col-md-6"">
+            <table class=""table table-bordered table-hover table-sm"">
+                <thead>
+                    <tr>
+                        <th>
+                            Technology
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+    ");
+            WriteLiteral(@"                        EXAMPLE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class=""row"">
+                <div class=""col-md-6"">
+
+                    <button type=""button"" class=""btn btn-block btn-sm btn-info"">
+                        Add
+                    </button>
+                </div>
+                <div class=""col-md-6"">
+
+                    <button type=""button"" class=""btn btn-success btn-block btn-sm"">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div><br /></div>
+    <div class=""row"">
+        <div class=""col-md-12"">
+     ");
+            WriteLiteral(@"       <table class=""table table-bordered table-sm"">
+                <thead>
+                    <tr>
+                        <th colspan=""2"">
                             Servers
                         </th>
                     </tr>
@@ -205,27 +218,27 @@ using Sogeti_Client_Data_Repository.Models;
                 <tbody>
                     <tr>
                         <td>
-                            Production
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. Server Name
-                        </td>
- ");
-            WriteLiteral(@"                   </tr>
-                    <tr>
-                        <td>
-                            Production
-                        </td>
-                        <td>
-                            Ex. Server Name
+                            EXAMPLE
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            QA
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. Server Name
+                            EXAMPLE
+                        </td>
+          ");
+            WriteLiteral(@"          </tr>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                        <td>
+                            EXAMPLE
                         </td>
                     </tr>
                 </tbody>
@@ -237,22 +250,27 @@ using Sogeti_Client_Data_Repository.Models;
                 </div>
                 <div class=""col-md-3"">
 
-                    <button type=""button"" class=""btn btn-info btn-block"">
+                    <button type=""button"" class=""btn btn-block btn-sm btn-info"">
                         Add
                     </button>
                 </div>
                 <div class=""col-md-3"">
 
-                    <button type=""bu");
-            WriteLiteral(@"tton"" class=""btn btn-success btn-block"">
+                    <button type=""button"" class=""btn btn-success btn-block btn-sm"">
                         Save
                     </button>
                 </div>
             </div>
-            <table class=""table table-bordered table-hover"">
+        </div>
+    </div>
+    <div><br /></div>
+    <div class=""row"">
+        <div class=""col-md-12"">
+    ");
+            WriteLiteral(@"        <table class=""table table-bordered table-sm"">
                 <thead>
                     <tr>
-                        <th>
+                        <th colspan=""2"">
                             URLs
                         </th>
                     </tr>
@@ -268,27 +286,27 @@ using Sogeti_Client_Data_Repository.Models;
                 <tbody>
                     <tr>
                         <td>
-                            Production
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. URL
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            QA
-         ");
-            WriteLiteral(@"               </td>
-                        <td>
-                            Ex. URL
+                            EXAMPLE
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Development
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. URL
+                            EXAMPLE
+                        </td>
+                    ");
+            WriteLiteral(@"</tr>
+                    <tr>
+                        <td>
+                            EXAMPLE
+                        </td>
+                        <td>
+                            EXAMPLE
                         </td>
                     </tr>
                 </tbody>
@@ -300,78 +318,102 @@ using Sogeti_Client_Data_Repository.Models;
                 </div>
                 <div class=""col-md-3"">
 
-                    <button type=""button"" class=""btn btn-info btn-block"">
+                    <button type=""button"" class=""btn btn-block btn-sm btn-info"">
                         Add
                     </button>
                 </div>
                 <div class=""col-md-3"">
 
-                    <button type=""button"" class=""btn btn-success btn-block"">
+                    <button type=""button"" class=""btn btn-success btn-block btn-sm"">
                         Save
                     </button>
                 </div>
-           ");
-            WriteLiteral(@" </div>
+            </div>
+        </div>
+    </div>
+    <div><br /></div>
+    <div class=""row"">
+        <div class=""col-md-6"">
+            <ta");
+            WriteLiteral(@"ble class=""table table-hover table-bordered"">
+                <tbody>
+                    <tr>
+                        <td>
+                            Code Source:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""source"" name=""source"" value=""EXAMPLE"">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Stability Rating:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""stable"" name=""stable"" value=""EXAMPLE"">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Future Dev. Rating:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""future"" name=""future"" value=""EXAMPLE"">
+                        </td>
+                    </tr>
+                ");
+            WriteLiteral(@"</tbody>
+            </table>
+        </div>
+        <div class=""col-md-6"">
+            <table class=""table table-hover table-bordered"">
+                <tbody>
+                    <tr>
+                        <td>
+                            Repository:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""repo"" name=""repo"" value=""EXAMPLE"">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sensitive Data:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""sensitive"" name=""sensitive"" value=""EXAMPLE"">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Criticality:
+                        </td>
+                        <td>
+                            <input type=""text"" id=""crit"" name=""crit"" value=""EX");
+            WriteLiteral(@"AMPLE"">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class=""row"">
-                <div class=""col-md-12"">
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Code Source: Ex. Code Source
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Stability Rating: Ex. Stability Rating
-                            </h3>
-                        </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Future Dev. Rating: Ex. Rating
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Repository: Ex. Repository
-                            </h3>
-               ");
-            WriteLiteral(@"         </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-md-6"">
-                            <h3>
-                                Sensitive Data: Ex. Sensitive Data
-                            </h3>
-                        </div>
-                        <div class=""col-md-6"">
-                            <h3>
-                                Criticality: Ex. Criticality
-                            </h3>
-                        </div>
-                    </div>
-                    <div class=""row"">
-                        <div class=""col-md-3"">
-                        </div>
-                        <div class=""col-md-3"">
-                        </div>
-                        <div class=""col-md-3"">
-                        </div>
-                        <div class=""col-md-3"">
+                <div class=""col-md-6"">
+                </div>
+                <div class=""col-md-6"">
 
-                            <button type=""button"" class=""btn btn-success btn-block"">
-                                Save
-                            </b");
-            WriteLiteral(@"utton>
-                        </div>
-                    </div>
+                    <button type=""button"" class=""btn btn-success btn-block btn-sm"">
+                        Save
+                    </button>
                 </div>
             </div>
-            <table class=""table table-bordered table-hover"">
+        </div>
+    </div>
+    <div><br /></div>
+    <div class=""row"">
+        <div class=""col-md-12"">
+            <table class=""table table-sm table-hover table-bordered"">
                 <thead>
                     <tr>
-                        <th>
+                        <th colspan=""2"">
                             Notes
                         </th>
                     </tr>
@@ -381,65 +423,53 @@ using Sogeti_Client_Data_Repository.Models;
                         </th>
                         <th>
                             Note Text
-                        </th>
+                        ");
+            WriteLiteral(@"</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            Ex. Name
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td");
-            WriteLiteral(@">
-                        <td>
-                            Ex. Note
+                            EXAMPLE
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Ex. Name
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
+                            EXAMPLE
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Ex. Name
+                            EXAMPLE
                         </td>
                         <td>
-                            Ex. Note
+                            EXAMPLE
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class=""row"">
                 <div class=""col-md-3"">
-                </div>");
-            WriteLiteral(@"
-                <div class=""col-md-3"">
                 </div>
                 <div class=""col-md-3"">
+         ");
+            WriteLiteral(@"       </div>
+                <div class=""col-md-3"">
+
+                    <button type=""button"" class=""btn btn-block btn-sm btn-info"">
+                        Add
+                    </button>
                 </div>
                 <div class=""col-md-3"">
 
-                    <button type=""button"" class=""btn btn-info btn-block"">
-                        Add
+                    <button type=""button"" class=""btn btn-success btn-sm btn-block"">
+                        Save
                     </button>
                 </div>
             </div>
