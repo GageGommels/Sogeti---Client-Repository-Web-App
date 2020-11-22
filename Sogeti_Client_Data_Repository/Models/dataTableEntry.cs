@@ -7,7 +7,7 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class dataTableEntry
     {
-        String app_ID;
+        int app_ID;
         String app_name;
         String department;
         String departmentManager;
@@ -31,7 +31,7 @@ namespace Sogeti_Client_Data_Repository.Models
 
         public dataTableEntry() { } //Blank Contructor
 
-        public dataTableEntry(string app_name, string department, string departmentManager, string client, string primaryBA, string techContact, string applicationType, string tech, string productionServer, string productionURL, string qaServer, string qaURL, string devlopmentServer, string devlopmentURL, string codeSource, string repository, string stability, string futureDevlopment, string sensitivity, string criticality, string app_ID)
+        public dataTableEntry(string app_name, string department, string departmentManager, string client, string primaryBA, string techContact, string applicationType, string tech, string productionServer, string productionURL, string qaServer, string qaURL, string devlopmentServer, string devlopmentURL, string codeSource, string repository, string stability, string futureDevlopment, string sensitivity, string criticality, int app_ID)
         {
             this.App_ID = app_ID;
             this.app_name = app_name;
@@ -76,6 +76,6 @@ namespace Sogeti_Client_Data_Repository.Models
         public string FutureDevlopment { get => futureDevlopment; set => futureDevlopment = value; }
         public string Sensitivity { get => sensitivity; set => sensitivity = value; }
         public string Criticality { get => criticality; set => criticality = value; }
-        public string App_ID { get => app_ID; set => app_ID = value; }
+        public int App_ID { get => app_ID; set => app_ID = value; }
     }
 }
