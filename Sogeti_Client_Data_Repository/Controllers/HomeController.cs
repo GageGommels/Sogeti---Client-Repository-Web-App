@@ -60,7 +60,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 {
                     HttpContext.Session.SetString("user", login.Username);
                     TempData["msg"] = response;
-                    return View("Index");
+                    return View("Settings");
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 if (response == "Password Successfully Changed")
                 {
                     TempData["msg"] = response;
-                    return View("Index");
+                    return View("test");
                 }
                 else
                 {

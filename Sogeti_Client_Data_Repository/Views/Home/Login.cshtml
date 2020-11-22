@@ -1,8 +1,20 @@
 ﻿@model Sogeti_Client_Data_Repository.Models.Login
 @{
+    Layout = "~/Views/Shared/_Landing.cshtml";
     ViewData["Title"] = "Login";
 }
+<style>
+    .hidden {
+        display: none;
+    }
+    .not-hidden {
+        display: inline;
+    }
+    .inavild-pass {
+        color: red;
+    }
 
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -27,6 +39,9 @@
                             </label>
                             <input asp-for="Password" type="password" class="form-control" />
                             <span asp-validation-for="Password"></span>
+                            <label class="control-label hidden inavild-pass" id="invalid-label">
+                                Invalid Username and/or Password
+                            </label>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -67,7 +82,8 @@
     if (TempData["msg"] != null)
     {
         <script>
-            alert('@TempData["msg"]')
+            var label = document.getElementById("invalid-label");
+            label.className = 'control-label not-hidden inavild-pass'
         </script>
     }
 }

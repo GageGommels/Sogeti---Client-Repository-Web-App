@@ -1,8 +1,26 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Landing.cshtml";
     ViewData["Title"] = "Home Page";
 }
+
+<style>
+    .loginButton {
+        width: 50%;
+        margin: auto;
+    }
+</style>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="loginButton">
+    <button style="width: 50%; margin: auto;" type="button" onclick=" relocate_home()" class="btn btn-primary btn-lg btn-block">Login</button>
+</div>
+
+<script>
+    function relocate_home() {
+        location.href = "home/login";
+    } 
+</script>
