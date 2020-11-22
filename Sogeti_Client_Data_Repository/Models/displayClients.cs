@@ -48,6 +48,7 @@ namespace Sogeti_Client_Data_Repository.Models
                                 string description = sqlReader.GetString(2);
 
                                 data += "<tr><td scope='col' class='col-3'><a href='ClientApplications/'>" + name + "</a></td><td scope='col' class='col-9'>" + description + "</td></tr>";
+                                
                             }
                         }
                     }
