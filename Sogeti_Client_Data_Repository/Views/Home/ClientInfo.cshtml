@@ -1,4 +1,4 @@
-﻿@model Sogeti_Client_Data_Repository.Models.Client
+﻿@model Sogeti_Client_Data_Repository.Models.displayClients
 @{
     ViewData["Title"] = "ClientInfo";
 }
@@ -31,51 +31,23 @@
     <br>
     <br>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <form class="form-inline">
-                    <div class="col-md-2">
-                        <input asp-for="ClientName" type="text" placeholder="Client Name">
-                        <span asp-validation-for="ClientName"></span>
-                    </div>
-                    <div class="col-md-5">
-                        <input asp-for="Description" type="text" placeholder="Description">
-                        <span asp-validation-for="Description"></span>
-                    </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-info btn-block"> Search </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+
         <br>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <table class="table table-bordered table-hover table-fixed">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col-3">Client Names</th>
-                            <th scope="col" class="col-9">Descriptions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="col" class="col-3">
-                                <a href="ClientApplications/">Client 1</a>
-                            </td>
-                            <td scope="col" class="col-9">Description 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">
-                                <a href="ClientApplications/">Client 1</a>
-                            </td>
-                            <td scope="col" class="col-9">Description 1</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form id="tableForm" runat="server">
+                    <table class="table table-bordered table-hover table-fixed">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-3">Client Names</th>
+                                <th scope="col" class="col-9">Descriptions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableData">
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
         <div class="row">
@@ -92,3 +64,15 @@
         </div>
     </div>
 </body>
+<script>
+    //function loadData() {
+        var data = "";
+        @{
+            displayClients clientData = new displayClients();
+            String htmlData = clientData.getClientInfo();
+        }
+    var data = '@htmlData';
+    console.log(data);
+    document.getElementById('tableData').innerhtml += data;
+   // }
+</script>
