@@ -7,6 +7,11 @@
     data = getData.getDataTableEntriesTest();
 }
 <style>
+    tbody th:hover {
+        background-color: #ffa;
+    }
+</style>
+<style>
     .checkboxes {
         width: 10%;
         min-width: 225px;
@@ -15,7 +20,7 @@
     }
 
     #tableInfo {
-        width: 85%;
+        width: 83%;
         float: right;
         margin-right: 10px;
         padding: 10px;
@@ -50,210 +55,232 @@
         margin-left: 30px;
         font-size: larger;
     }
+
+    .hidden {
+        display: none;
+    }
+
+    .selected {
+    }
 </style>
-@*    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">*@
 <body>
     <div id="check-boxes-and-tables">
         <div class="checkboxes">
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="App Name" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="0" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    App ID
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="1" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                     App Name
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Department" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Department
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Dept Manager" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Dept Manager
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Client" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Client
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Priamary BA" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Priamary BA
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Tech Contact" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Tech Contact
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Application Type" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="2" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                     Application Type
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Tech" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="3" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
-                    Tech
+                    Client
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="P Server" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    P Server
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="P URL" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    P URL
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="QA Server" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    QA Server
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="QA URL" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    QA URL
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Dev Server" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Dev Server
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Dev URL" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Dev URL
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Code Source" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="4" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                     Code Source
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Repository" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="5" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Criticality
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="6" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Department
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="7" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Department Manager
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="8" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Devlopment Server
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="9" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Devlopment URL
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="10" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Future Devlopment
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="11" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Primary BA
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="12" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Production Server
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="13" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Production URL
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="14" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    QA Server
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="15" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    QA URL
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="16" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                     Repository
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Stability" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Stability
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Future Dev" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Future Dev
-                </label>
-            </div>
-            <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Sensitivity" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="17" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
                     Sensitivity
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" type="checkbox" value="Criticality" id="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="18" type="checkbox" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
-                    Criticality
+                    Stability
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="19" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Tech
+                </label>
+            </div>
+            <div class="form-check">
+                <input name="inputBox" class="form-check-input" value="20" type="checkbox" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Tech Contact
                 </label>
             </div>
         </div>
-        <div id="tableInfo"></div>
-    </div>
+        <div id="tableInfo">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th class="col-0 hidden"> App ID</th>
+                        <th class="col-1 hidden"> App Name</th>
+                        <th class="col-2 hidden"> Application Type</th>
+                        <th class="col-3 hidden"> Client </th>
+                        <th class="col-4 hidden"> Code Source</th>
+                        <th class="col-5 hidden"> Criticality</th>
+                        <th class="col-6 hidden"> Department</th>
+                        <th class="col-7 hidden"> Department Manager </th>
+                        <th class="col-8 hidden"> Devlopment Server</th>
+                        <th class="col-9 hidden"> Devlopment URL</th>
+                        <th class="col-10 hidden">Future Devlopment</th>
+                        <th class="col-11 hidden">Primary BA</th>
+                        <th class="col-12 hidden">Production Server</th>
+                        <th class="col-13 hidden">Production URL</th>
+                        <th class="col-14 hidden">QA Server</th>
+                        <th class="col-15 hidden">QA URL</th>
+                        <th class="col-16 hidden">Repository</th>
+                        <th class="col-17 hidden">Sensitivity</th>
+                        <th class="col-18 hidden">Stability</th>
+                        <th class="col-19 hidden">Tech</th>
+                        <th class="col-20 hidden">Tech Contact</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                </tbody>
+            </table>
+        </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script>
-    var data = [];
+    var data = []
+    var entry1 = { App_ID: "2", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
+    var entry2 = { App_ID: "3", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
+    var entry3 = { App_ID: "4", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" }
+    data.push(entry1);
+    data.push(entry2);
+    data.push(entry3);
 
-    @{
-        foreach (dataTableEntry entry in data) {
-            <text>
-            var entry = { App_ID: '@entry.App_ID', App_name: '@entry.App_name', Department: '@entry.Department', DepartmentManager: '@entry.DepartmentManager', Client: '@entry.Client', PrimaryBA: '@entry.PrimaryBA', TechContact: '@entry.TechContact', ApplicationType: '@entry.ApplicationType', Tech: '@entry.Tech', ProductionServer: '@entry.ProductionServer', ProductionURL: '@entry.ProductionURL', QaServer: '@entry.QaServer', QaURL: '@entry.QaURL', DevlopmentServer: '@entry.DevlopmentServer', DevlopmentURL: '@entry.DevlopmentURL', CodeSource: '@entry.CodeSource', Repository: '@entry.Repository', Stability: '@entry.Stability', FutureDevlopment: '@entry.FutureDevlopment', Sensitivity: '@entry.Sensitivity', Criticality: '@entry.Criticality' };
-            data.push(entry);
-            </text>
+
+    // Find a <table> element with id="myTable":
+    var table = document.getElementById("dataTableBody");
+
+    data.forEach(function (value, i) {
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        var row = table.insertRow();
+        row.setAttribute("id", `row-${value.App_ID}`);
+
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        Object.keys(value).forEach(function (k, i) {
+            //Add the Cells and Data
+            var newCell = row.insertCell(-1);
+            newCell.innerHTML = value[k].toString();
+            newCell.setAttribute("class", `col-${i} hidden`);
+
+        });
+    });
+
+
+    var rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    for (i = 0; i < rows.length; i++) {
+        rows[i].onclick = function (m, i) {
+            console.log(this.id.replace("row-", ""));
         }
     }
 
-
-
-
-
-
-
-
-    @*var headers = [];
-    var dvTable = document.querySelector("#tableInfo");
+    var headers = [];
 
     document.querySelectorAll('.form-check-input').forEach(item => {
         item.addEventListener('click', event => {
             if (item.checked) {
-                //Add to headers
-                headers.push(item.value);
-                console.log(headers);
-                createTable()
+                var col = document.getElementsByClassName(`col-${item.value}`);
+                console.log(col);
+                for (let item2 of col) {
+                    console.log(item2);
+                    item2.className = `col-${item.value} selected`;
+                }
+
             }
             if (!item.checked) {
-                //Remove from headers
-                headers = headers.filter(e => e !== item.value);
-                console.log(headers);
-                createTable()
+                var col = document.getElementsByClassName(`col-${item.value}`);
+                for (let item2 of col) {
+                    console.log(item2);
+                    item2.className = `col-${item.value} hidden`;
+                }
             }
         })
-    })*@
-
-
-    @*function createTable() {
-        $('div#tableInfo').empty();
-
-        //Create a HTML Table element.
-        var table = document.createElement("TABLE");
-        table.classList.add("table")
-
-        //Get the count of columns.
-        var columnCount = headers.length;
-
-        var header = table.createTHead();
-
-        //Add the header row.
-        var row = header.insertRow(0);
-        for (var i = 0; i < columnCount; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.innerHTML = headers[i];
-            row.appendChild(headerCell);
-        }
-
-        //Add the data rows.
-        for (var i = 1; i < customers.length; i++) {
-            row = table.insertRow(-1);
-            for (var j = 0; j < columnCount; j++) {
-                var cell = row.insertCell(-1);
-                cell.innerHTML = customers[i][j];
-            }
-        }
-
-        console.log(dvTable);
-        dvTable.appendChild(table);
-    }*@
-
-    $(document).ready(function () { $('footer').empty(); });
-
+    });
 </script>
