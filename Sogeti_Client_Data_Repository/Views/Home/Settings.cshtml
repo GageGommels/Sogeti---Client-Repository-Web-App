@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Settings";
 }
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -10,7 +9,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>
+                                <th colspan="2">
                                     Home Filters
                                 </th>
                             </tr>
@@ -21,7 +20,7 @@
                                     Application Name
                                 </td>
                                 <td>
-                                    Ex. Name
+                                    <input type="text" id="hAppName" name="hAppName">
                                 </td>
                             </tr>
                             <tr>
@@ -29,7 +28,7 @@
                                     Department
                                 </td>
                                 <td>
-                                    Ex. Dept
+                                    <input type="text" id="hDept" name="hDept">
                                 </td>
                             </tr>
                             <tr>
@@ -37,7 +36,7 @@
                                     Department Manager
                                 </td>
                                 <td>
-                                    Ex. Dept Manager
+                                    <input type="text" id="hDeptMgr" name="hDeptMgr">
                                 </td>
                             </tr>
                             <tr>
@@ -45,7 +44,7 @@
                                     Primary BA
                                 </td>
                                 <td>
-                                    Ex. Primary BA
+                                    <input type="text" id="hBa" name="hBa">
                                 </td>
                             </tr>
                             <tr>
@@ -53,7 +52,7 @@
                                     Client
                                 </td>
                                 <td>
-                                    Ex. Client
+                                    <input type="text" id="hClient" name="hClient">
                                 </td>
                             </tr>
                         </tbody>
@@ -61,7 +60,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>
+                                <th colspan="2">
                                     User Filters
                                 </th>
                             </tr>
@@ -72,7 +71,7 @@
                                     User First Name
                                 </td>
                                 <td>
-                                    Ex. First Name
+                                    <input type="text" id="uFirstName" name="uFirstName">
                                 </td>
                             </tr>
                             <tr>
@@ -80,7 +79,7 @@
                                     User Last Name
                                 </td>
                                 <td>
-                                    Ex. Last Name
+                                    <input type="text" id="uLastName" name="uLastName">
                                 </td>
                             </tr>
                             <tr>
@@ -88,7 +87,7 @@
                                     Username
                                 </td>
                                 <td>
-                                    Ex. Username
+                                    <input type="text" id="uUsername" name="uUsername">
                                 </td>
                             </tr>
                         </tbody>
@@ -96,7 +95,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>
+                                <th colspan="2">
                                     Client Filters
                                 </th>
                             </tr>
@@ -107,7 +106,7 @@
                                     Client Name
                                 </td>
                                 <td>
-                                    Ex. Client Name
+                                    <input type="text" id="cName" name="cName">
                                 </td>
                             </tr>
                             <tr>
@@ -115,7 +114,7 @@
                                     Description
                                 </td>
                                 <td>
-                                    Ex. Desc
+                                    <input type="text" id="cDesc" name="cDesc">
                                 </td>
                             </tr>
                         </tbody>
@@ -125,7 +124,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>
+                                <th colspan="3">
                                     Database Filters
                                 </th>
                             </tr>
@@ -149,8 +148,10 @@
                                     Application Name
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dAppNameCheck" name="dAppNameCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dAppName" name="dAppName">
                                 </td>
                             </tr>
                             <tr>
@@ -158,8 +159,10 @@
                                     Department
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dDeptCheck" name="dDeptCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dDept" name="dDept">
                                 </td>
                             </tr>
                             <tr>
@@ -167,8 +170,10 @@
                                     Department Manager
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dDeptMgrCheck" name="dDeptMgrCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dDeptMgr" name="dDeptMgr">
                                 </td>
                             </tr>
                             <tr>
@@ -176,8 +181,10 @@
                                     Primary BA
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dBaCheck" name="dBaCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dBa" name="dBa">
                                 </td>
                             </tr>
                             <tr>
@@ -185,8 +192,10 @@
                                     Client
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dClientCheck" name="dClientCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dClient" name="dClient">
                                 </td>
                             </tr>
                             <tr>
@@ -194,8 +203,10 @@
                                     Tech Contact
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dTContactCheck" name="dTContactCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dTContact" name="dTContact">
                                 </td>
                             </tr>
                             <tr>
@@ -203,8 +214,10 @@
                                     Application Type
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dAppTypeCheck" name="dAppTypeCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dAppType" name="dAppType">
                                 </td>
                             </tr>
                             <tr>
@@ -212,8 +225,10 @@
                                     Technologies
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dTechCheck" name="dTechCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dTech" name="dTech">
                                 </td>
                             </tr>
                             <tr>
@@ -221,8 +236,10 @@
                                     P. Server
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dPServerCheck" name="dPServerCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dPServer" name="dPServer">
                                 </td>
                             </tr>
                             <tr>
@@ -230,8 +247,10 @@
                                     P. URL
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dPUrlCheck" name="dPUrlCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dPUrl" name="dPUrl">
                                 </td>
                             </tr>
                             <tr>
@@ -239,8 +258,10 @@
                                     QA Server
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dQAServerCheck" name="dQAServerCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dQAServer" name="dQAServer">
                                 </td>
                             </tr>
                             <tr>
@@ -248,8 +269,10 @@
                                     QA URL
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dQAUrlCheck" name="dQAUrlCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dQAUrl" name="dQAUrl">
                                 </td>
                             </tr>
                             <tr>
@@ -257,8 +280,10 @@
                                     Dev. Server
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dDevServerCheck" name="dDevServerCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dDevServer" name="dDevServer">
                                 </td>
                             </tr>
                             <tr>
@@ -266,8 +291,10 @@
                                     Dev. URL
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dDevUrlCheck" name="dDevUrlCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dDevUrl" name="dDevUrl">
                                 </td>
                             </tr>
                             <tr>
@@ -275,8 +302,10 @@
                                     Code Source
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dCodeSourceCheck" name="dCodeSourceCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dCodeSource" name="dCodeSource">
                                 </td>
                             </tr>
                             <tr>
@@ -284,8 +313,10 @@
                                     Repository
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dRepoCheck" name="dRepoCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dRepo" name="dRepo">
                                 </td>
                             </tr>
                             <tr>
@@ -293,8 +324,10 @@
                                     Stability
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dStabCheck" name="dStabCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dStab" name="dStab">
                                 </td>
                             </tr>
                             <tr>
@@ -302,8 +335,10 @@
                                     Future Dev.
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dFutureCheck" name="dFutureCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dFuture" name="dFuture">
                                 </td>
                             </tr>
                             <tr>
@@ -311,8 +346,10 @@
                                     Sensitivity
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dSenCheck" name="dSenCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dSen" name="dSen">
                                 </td>
                             </tr>
                             <tr>
@@ -320,8 +357,10 @@
                                     Criticality
                                 </td>
                                 <td>
+                                    <input type="checkbox" id="dCritCheck" name="dCritCheck">
                                 </td>
                                 <td>
+                                    <input type="text" id="dCrit" name="dCrit">
                                 </td>
                             </tr>
                         </tbody>

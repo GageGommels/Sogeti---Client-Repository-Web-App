@@ -1,0 +1,38 @@
+﻿@model Sogeti_Client_Data_Repository.Models.testClass
+@using System.Collections.Generic
+@using System.Diagnostics;
+@{
+    @*getTableData getData = new getTableData();
+    List<dataTableEntry> testData = new List<dataTableEntry>();
+    testData = getTableData;*@
+    ViewData["Title"] = "test";
+    List<testClass> data = new List<testClass>();
+    string test = "test";
+    Debug.WriteLine("Test");
+    testClass p1 = new testClass("Gage", 21, "Gage@asu.edu");
+    testClass p2 = new testClass("John", 21, "John@asu.edu");
+    testClass p3 = new testClass("Kito", 21, "Kito@asu.edu");
+    data.Add(p1);
+    data.Add(p2);
+    data.Add(p3);
+}
+
+<body>
+    <h1>@p1.Name</h1>
+</body>
+
+<script type="text/javascript">
+    var jsData = [];
+
+    @{
+        foreach (testClass p in data) {
+            <text>
+            var person = { Name: '@p.Name', Age: parseInt('@p.Age'), Email: '@p.Email' };
+            jsData.push(person);    
+            </text>
+        }
+    }
+
+    console.log(jsData);
+</script>
+

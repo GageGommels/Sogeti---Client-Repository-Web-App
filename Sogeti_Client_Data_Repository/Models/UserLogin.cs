@@ -61,7 +61,7 @@ namespace Sogeti_Client_Data_Repository.Models
             {
                 con.Close();
             }
-
+            CachedTables.DevelopmentRating.TryGetValue(1, out string value);
             return Convert.ToString(LoginResponse.Value);
         }
 
@@ -74,9 +74,9 @@ namespace Sogeti_Client_Data_Repository.Models
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@User_Name", login.Username);    //@Username is an Input Parameter to the Proc
             com.Parameters.AddWithValue("@Password", hashedPass);
-            com.Parameters.AddWithValue("@First_Name", "Wayne");    
-            com.Parameters.AddWithValue("@Last_Name", "Gacey");
-            com.Parameters.AddWithValue("@Email", "wgacey@gmail.com");   
+            com.Parameters.AddWithValue("@First_Name", "Joe");    
+            com.Parameters.AddWithValue("@Last_Name", "Miller");
+            com.Parameters.AddWithValue("@Email", "jmiller@gmail.com");   
 
             int response;
             try

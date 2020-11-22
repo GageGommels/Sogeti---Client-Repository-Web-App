@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
@@ -31,7 +29,6 @@ namespace Sogeti_Client_Data_Repository.Models
 
             SqlCommand com = new SqlCommand("get_ClientInfo", con);
             com.CommandType = CommandType.StoredProcedure;
-
             try
             {
                 using (con)
