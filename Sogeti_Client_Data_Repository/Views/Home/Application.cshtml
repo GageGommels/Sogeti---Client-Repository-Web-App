@@ -2,394 +2,571 @@
     ViewData["Title"] = "Application";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Application Name: Ex Name
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Department: Ex Dept.
-                            </h3>
-                        </div>
+@{
+    dataTableEntry getData = new dataTableEntry("Application Name", "Department", "Department Manager", "Client", "Primary BA", "Technical Contact", "Application Type 1,Application Type 2", "Technology 1,Technology 2", "Production Server", "Production URL", "QA Server", "QA URL", "Development Server", "Development URL", "Some Place", "10", "10", "10", "10", "10", "Application ID 1");
+}
+<script>
+
+    function onLoad() {
+        document.getElementById("appName").value = "@getData.App_name";
+        document.getElementById("dept").value = "@getData.Department";
+        document.getElementById("deptMgr").value = "@getData.DepartmentManager";
+        document.getElementById("client").value = "@getData.Client";
+        document.getElementById("ba").value = "@getData.PrimaryBA";
+        document.getElementById("contact").value = "@getData.TechContact";
+
+        var table, data, row, cell, input;
+
+        table = document.getElementById("myApplicationType");
+        data = "@getData.ApplicationType".split(",");
+        for (i = 0; i < data.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = data[i];
+            cell.appendChild(input);
+        }
+
+        table = document.getElementById("myTechnology");
+        data = "@getData.Tech".split(",");
+        for (i = 0; i < data.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = data[i];
+            cell.appendChild(input);
+        }  
+
+        var prod, qa, dev;
+
+        table = document.getElementById("myServers");
+        prod = "@getData.ProductionServer".split(",");
+        qa = "@getData.QaServer".split(",");
+        dev = "@getData.DevlopmentServer".split(",");
+        for (i = 0; i < prod.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "Production"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = prod[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < qa.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "QA"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = qa[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < dev.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "Development"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = dev[i];
+            cell.appendChild(input);
+        }
+
+
+        table = document.getElementById("myUrls");
+        prod = "@getData.ProductionURL".split(",");
+        qa = "@getData.QaURL".split(",");
+        dev = "@getData.DevlopmentURL".split(",");
+        for (i = 0; i < prod.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "Production"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = prod[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < qa.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "QA"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = qa[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < dev.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('select');
+            option = document.createElement('option');
+            option.text = "Development"
+            input.add(option);
+            input.disabled = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = dev[i];
+            cell.appendChild(input);
+        }
+
+        table = document.getElementById("myNotes");
+        data = "@getData.ApplicationType".split(",");
+        /*for (i = 0; i < data.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = data[i];
+            cell.appendChild(input);
+        }*/
+
+        document.getElementById("source").value = "@getData.CodeSource";
+        document.getElementById("stable").value = "@getData.Stability";
+        document.getElementById("future").value = "@getData.FutureDevlopment";
+        document.getElementById("repo").value = "@getData.Repository";
+        document.getElementById("sensitive").value = "@getData.Sensitivity";
+        document.getElementById("crit").value = "@getData.Criticality";
+    }
+
+</script>
+<body onload="onLoad()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Application Name:
+                            </td>
+                            <td>
+                                <input type="text" id="appName" name="appName" value="EXAMPLE" readonly>
+                            </td>
+                            <td>
+                                Client:
+                            </td>
+                            <td>
+                                <input type="text" id="client" name="client" value="EXAMPLE" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Department:
+                            </td>
+                            <td>
+                                <input type="text" id="dept" name="dept" value="EXAMPLE" readonly>
+                            </td>
+                            <td>
+                                Primary BA:
+                            </td>
+                            <td>
+                                <input type="text" id="ba" name="ba" value="EXAMPLE" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Dept. Manager:
+                            </td>
+                            <td>
+                                <input type="text" id="deptMgr" name="deptMgr" value="EXAMPLE" readonly>
+                            </td>
+                            <td>
+                                Tech. Contact:
+                            </td>
+                            <td>
+                                <input type="text" id="contact" name="contact" value="EXAMPLE" readonly>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered table-hover table-sm" id="myApplicationType">
+                    <thead>
+                        <tr>
+                            <th>
+                                Application Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <button type="button" class="btn btn-sm btn-block btn-info" onclick="applicationType()">
+                            Add
+                        </button>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Dept. Manager: Ex. Dept. Manager
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Client: Ex. Client Name
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Primary BA: Ex. Primary BA
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Technical Contact: Ex. Technical Contact
-                            </h3>
-                        </div>
+                    <div class="col-md-6">
+
+                        <button type="button" class="btn btn-success btn-sm btn-block">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Appplication Type
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. App. Type
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-6">
+            <div class="col-md-6">
+                <table class="table table-bordered table-hover table-sm" id="myTechnology">
+                    <thead>
+                        <tr>
+                            <th>
+                                Technology
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-6">
 
-                            <button type="button" class="btn btn-info btn-block">
-                                Add
-                            </button>
-                        </div>
-                        <div class="col-md-6">
-
-                            <button type="button" class="btn btn-success btn-block">
-                                Save
-                            </button>
-                        </div>
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="technology()">
+                            Add
+                        </button>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Technologies
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Ex. Tech
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="col-md-6">
 
-                            <button type="button" class="btn btn-info btn-block">
-                                Add
-                            </button>
-                        </div>
-                        <div class="col-md-6">
-
-                            <button type="button" class="btn btn-success btn-block">
-                                Save
-                            </button>
-                        </div>
+                        <button type="button" class="btn btn-success btn-block btn-sm">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            Servers
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            Type
-                        </th>
-                        <th>
-                            Server Name
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Production
-                        </td>
-                        <td>
-                            Ex. Server Name
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Production
-                        </td>
-                        <td>
-                            Ex. Server Name
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            QA
-                        </td>
-                        <td>
-                            Ex. Server Name
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-
-                    <button type="button" class="btn btn-info btn-block">
-                        Add
-                    </button>
-                </div>
-                <div class="col-md-3">
-
-                    <button type="button" class="btn btn-success btn-block">
-                        Save
-                    </button>
-                </div>
-            </div>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            URLs
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            Type
-                        </th>
-                        <th>
-                            URL
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Production
-                        </td>
-                        <td>
-                            Ex. URL
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            QA
-                        </td>
-                        <td>
-                            Ex. URL
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Development
-                        </td>
-                        <td>
-                            Ex. URL
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-
-                    <button type="button" class="btn btn-info btn-block">
-                        Add
-                    </button>
-                </div>
-                <div class="col-md-3">
-
-                    <button type="button" class="btn btn-success btn-block">
-                        Save
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Code Source: Ex. Code Source
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Stability Rating: Ex. Stability Rating
-                            </h3>
-                        </div>
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-sm" id="myServers">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                Servers
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Server Name
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-3">
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Future Dev. Rating: Ex. Rating
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Repository: Ex. Repository
-                            </h3>
-                        </div>
+                    <div class="col-md-3">
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3>
-                                Sensitive Data: Ex. Sensitive Data
-                            </h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3>
-                                Criticality: Ex. Criticality
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
+                    <div class="col-md-3">
 
-                            <button type="button" class="btn btn-success btn-block">
-                                Save
-                            </button>
-                        </div>
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="servers()">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-success btn-block btn-sm">
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            Notes
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            Username
-                        </th>
-                        <th>
-                            Note Text
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Ex. Name
-                        </td>
-                        <td>
-                            Ex. Note
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-sm" id="myUrls">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                URLs
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                URL
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
 
-                    <button type="button" class="btn btn-info btn-block">
-                        Add
-                    </button>
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="urls()">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-success btn-block btn-sm">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Code Source:
+                            </td>
+                            <td>
+                                <input type="text" id="source" name="source" value="EXAMPLE">
+                            </td>
+                            <td>
+                                Repository:
+                            </td>
+                            <td>
+                                <input type="text" id="repo" name="repo" value="EXAMPLE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Stability Rating:
+                            </td>
+                            <td>
+                                <input type="text" id="stable" name="stable" value="EXAMPLE">
+                            </td>
+                            <td>
+                                Sensitive Data:
+                            </td>
+                            <td>
+                                <input type="text" id="sensitive" name="sensitive" value="EXAMPLE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Future Dev. Rating:
+                            </td>
+                            <td>
+                                <input type="text" id="future" name="future" value="EXAMPLE">
+                            </td>
+                            <td>
+                                Criticality:
+                            </td>
+                            <td>
+                                <input type="text" id="crit" name="crit" value="EXAMPLE">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-success btn-block btn-sm">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-sm table-hover table-bordered" id="myNotes">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                Notes
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Username
+                            </th>
+                            <th>
+                                Note Text
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="notes()">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-success btn-sm btn-block">
+                            Save
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+<script>
+    function applicationType() {
+        var table = document.getElementById("myApplicationType");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell = row.insertCell(0);
+
+        var input = document.createElement('input');
+        input.type = 'text';
+
+        cell.appendChild(input);
+    }
+
+    function technology() {
+        var table = document.getElementById("myTechnology");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell = row.insertCell(0);
+
+        var input = document.createElement('input');
+        input.type = 'text';
+
+        cell.appendChild(input);
+    }
+
+    function servers() {
+        var table = document.getElementById("myServers");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        var input1 = document.createElement('select');
+        var option1 = document.createElement('option');
+        option1.text = "Development";
+        input1.add(option1);
+        var option2 = document.createElement('option');
+        option2.text = "QA";
+        input1.add(option2);
+        var option3 = document.createElement('option');
+        option3.text = "Production";
+        input1.add(option3);      
+
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+
+        cell1.appendChild(input1);
+        cell2.appendChild(input2);
+    }
+
+    function urls() {
+        var table = document.getElementById("myUrls");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        var input1 = document.createElement('select');
+        var option1 = document.createElement('option');
+        option1.text = "Development";
+        input1.add(option1);
+        var option2 = document.createElement('option');
+        option2.text = "QA";
+        input1.add(option2);
+        var option3 = document.createElement('option');
+        option3.text = "Production";
+        input1.add(option3);
+
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+
+        cell1.appendChild(input1);
+        cell2.appendChild(input2);
+    }
+
+    function notes() {
+        var table = document.getElementById("myNotes");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        var input1 = document.createElement('input');
+        input1.type = 'text';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+
+        cell1.appendChild(input1);
+        cell2.appendChild(input2);
+    }
+</script>

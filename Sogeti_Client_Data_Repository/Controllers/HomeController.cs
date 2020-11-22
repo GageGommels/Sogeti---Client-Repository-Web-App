@@ -27,6 +27,11 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        public IActionResult displayClients([Bind] Client client)
+        {       
+            return View();
+        }
+
         public IActionResult ClientApplications()
         {
             return View();
