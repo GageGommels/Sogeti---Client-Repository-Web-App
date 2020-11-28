@@ -136,6 +136,14 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        public IActionResult check(int id)
+        {
+            getTableData getData = new getTableData();
+            ViewBag.Selected = getData.testData(id);
+            Debug.WriteLine(id);
+            return View("Application");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
