@@ -4,21 +4,23 @@
 @{
     getTableData getData = new getTableData();
     List<dataTableEntry> testData = new List<dataTableEntry>();
-    testData = getData.getDataTableEntries(1);
-    foreach (dataTableEntry entry in testData) { Debug.WriteLine(entry.App_ID); }
+    @*testData = getData.getDataTableEntries(1);
+    foreach (dataTableEntry entry in testData) { Debug.WriteLine(entry.App_ID); }*@
     ViewData["Title"] = "test";
     List<testClass> data = new List<testClass>();
     Debug.WriteLine("Test");
     testClass p1 = new testClass("Gage", 21, "Gage@asu.edu");
     testClass p2 = new testClass("John", 21, "John@asu.edu");
     testClass p3 = new testClass("Kito", 21, "Kito@asu.edu");
-    data.Add(p1);
-    data.Add(p2);
-    data.Add(p3);
+    dataTableEntry testEntry = new dataTableEntry();
+    testEntry = getData.testData(2);
+    testData.Add(testEntry);
 }
 
 <body>
     <h1>@p1.Name</h1>
+    <input type="button" value="Test" onclick="location.href='@Url.Action("settings", "Home", new { ID = p1.Name })'" />
+    <a asp-action="check" asp-route-id="@p1.Age">Edit</a>
 </body>
 
 <script type="text/javascript">

@@ -176,6 +176,27 @@ namespace Sogeti_Client_Data_Repository.Models
             return data;
         }
 
+        public dataTableEntry testData(int ID)
+        {
+            if (ID == 1)
+            {
+                dataTableEntry newEntry = new dataTableEntry("App Name 1", "Department 1", "Gage Gommels", "Microsoft", "BA 1", "Scott Van", "Web App", "Java Script", "PS 1", "URL 1", "QAS 1", "QA URL 1", "DevS 1", "DevURL 1", "Code Source 1", "Repo 1", "High", "Medium", "low", "low", 1);
+                return newEntry;
+            }
+            else if (ID == 2)
+            {
+                dataTableEntry newEntry2 = new dataTableEntry("App Name 2", "Department 2", "Eric Kim", "Google", "BA 2", "Ethan C", "Windows App", "C#", "PS 2", "URL 2", "QAS 2", "QA URL 2", "DevS 2", "DevURL 2", "Code Source 2", "Repo 3", "Low", "low", "Medium", "medium", 2);
+                return newEntry2;
+            }
+            else if (ID == 3) {
+                dataTableEntry newEntry3 = new dataTableEntry("App Name 3", "Department 3", "Brian Zan", "FaceBook", "BA 3", "James M", "Web App", "Java Script", "PS 3", "URL 3", "QAS 3", "QA URL 3", "DevS 3", "DevURL 3", "Code Source 3", "Repo 3", "High", "High", "Medium", "High", 3);
+                return newEntry3;
+            }
+            dataTableEntry newEntry4 = new dataTableEntry("App Name 1", "Department 1", "Gage Gommels", "Microsoft", "BA 1", "Scott Van", "Web App", "Java Script", "PS 1", "URL 1", "QAS 1", "QA URL 1", "DevS 1", "DevURL 1", "Code Source 1", "Repo 1", "High", "Medium", "low", "low", 1);
+            return newEntry4;
+
+        }
+
 
     }
 }

@@ -73,8 +73,8 @@
                 </label>
             </div>
             <div class="form-check">
-                <input name="inputBox" class="form-check-input" value="1" type="checkbox" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
+                <input name="inputBox" class="form-check-input" value="1" type="checkbox" id="defaultCheck2">
+                <label class="form-check-label" for="defaultCheck2">
                     App Name
                 </label>
             </div>
@@ -241,46 +241,49 @@
     data.forEach(function (value, i) {
         // Create an empty <tr> element and add it to the 1st position of the table:
         var row = table.insertRow();
-        row.setAttribute("id", `row-${value.App_ID}`);
+        row.setAttribute("id", `row-${value.App_ID}`); //Sets the row Id to the App ID 
 
-        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-        Object.keys(value).forEach(function (k, i) {
-            //Add the Cells and Data
-            var newCell = row.insertCell(-1);
-            newCell.innerHTML = value[k].toString();
-            newCell.setAttribute("class", `col-${i} hidden`);
 
-        });
+    // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+    Object.keys(value).forEach(function (k, i) {
+        //Add the Cells and Data
+        var newCell = row.insertCell(-1);
+        newCell.innerHTML = value[k].toString();
+        newCell.setAttribute("class", `col-${i} hidden`);
+
     });
+});
 
 
-    var rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-    for (i = 0; i < rows.length; i++) {
-        rows[i].onclick = function (m, i) {
-            console.log(this.id.replace("row-", ""));
-        }
+var rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+for (i = 0; i < rows.length; i++) {
+    rows[i].onclick = function (m, i) {
+        console.log(this.id.replace("row-", "")); //Logs App ID
+        var tempId = this.id.replace("row-", ""); //Sets a variable to a App ID
+        window.location.href = '@Url.Action("check", "Home")/' + tempId; //Calls A Href
     }
+}
 
-    var headers = [];
+var headers = [];
 
-    document.querySelectorAll('.form-check-input').forEach(item => {
-        item.addEventListener('click', event => {
-            if (item.checked) {
-                var col = document.getElementsByClassName(`col-${item.value}`);
-                console.log(col);
-                for (let item2 of col) {
-                    console.log(item2);
-                    item2.className = `col-${item.value} selected`;
-                }
-
+document.querySelectorAll('.form-check-input').forEach(item => {
+    item.addEventListener('click', event => {
+        if (item.checked) {
+            var col = document.getElementsByClassName(`col-${item.value}`);
+            console.log(col);
+            for (let item2 of col) {
+                console.log(item2);
+                item2.className = `col-${item.value} selected`;
             }
-            if (!item.checked) {
-                var col = document.getElementsByClassName(`col-${item.value}`);
-                for (let item2 of col) {
-                    console.log(item2);
-                    item2.className = `col-${item.value} hidden`;
-                }
+
+        }
+        if (!item.checked) {
+            var col = document.getElementsByClassName(`col-${item.value}`);
+            for (let item2 of col) {
+                console.log(item2);
+                item2.className = `col-${item.value} hidden`;
             }
-        })
-    });
+        }
+    })
+});
 </script>
