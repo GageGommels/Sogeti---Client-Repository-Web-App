@@ -4,7 +4,7 @@
 
 @{
     dataTableEntry getData = new dataTableEntry("Application Name", "Department", "Department Manager", "Client", "Primary BA", "Technical Contact", "Application Type 1,Application Type 2", "Technology 1,Technology 2", "Production Server", "Production URL", "QA Server", "QA URL", "Development Server", "Development URL", "Some Place", "10", "10", "10", "10", "10", 1);
-    getData = ViewBag.Selected; 
+    getData = ViewBag.Selected;
 }
 <script>
 
@@ -448,7 +448,7 @@
                     </div>
                     <div class="col-md-3">
 
-                        <button type="button" class="btn btn-success btn-block btn-sm">
+                        <button type="button" class="btn btn-success btn-block btn-sm" onclick="editCodeSource()">
                             Save
                         </button>
                     </div>
@@ -540,7 +540,7 @@
         input1.add(option2);
         var option3 = document.createElement('option');
         option3.text = "Production";
-        input1.add(option3);      
+        input1.add(option3);
 
         var input2 = document.createElement('input');
         input2.type = 'text';
@@ -609,7 +609,36 @@
     }
 
     function editCodeSource() {
-        var input = document.getElementById();
+        var input = document.getElementById("source");
+        var form = document.createElement("form");
+
+        var source = input.value;
+//        <href=<%: Url.Action(" GetByList", "Listing", new { name = "John", contact = "calgary, vancouver" }) %>>
+//            window.location.href = 'Url.Action("editCodeSource", "Home")/' + getData.App_ID input.value; //Calls A Href
+
+        var appID = @getData.App_ID;
+        //window.location.href = 'Url.Action("editCodeSource", "Home")/' + new {appID, input.value};
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/editCodeSource",
+            data: {
+                ID: @getData.App_ID,
+                codeSource: input.value
+            },
+            dataType: "json",
+            success: function (response) {
+                alert("success");
+            },
+            failure: function (response) {
+                alert("fail");
+            },
+            error: function (response) {
+                alert("error");
+            }
+
+        });
+
     }
 
     function editRepository() {
