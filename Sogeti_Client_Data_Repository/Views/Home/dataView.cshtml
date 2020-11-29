@@ -1,10 +1,7 @@
 ﻿@using System.Collections.Generic
 @using System.Diagnostics;
 @{
-    ViewData["Title"] = "dataView";
-    getTableData getData = new getTableData();
-    List<dataTableEntry> data = new List<dataTableEntry>();
-    data = getData.getDataTableEntriesTest();
+
 }
 <style>
     tbody th:hover {
@@ -226,14 +223,20 @@
         </div>
 </body>
 <script>
-    var data = []
-    var entry1 = { App_ID: "2", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
-    var entry2 = { App_ID: "3", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
-    var entry3 = { App_ID: "4", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" }
-    data.push(entry1);
-    data.push(entry2);
-    data.push(entry3);
+    var data = [];
+    @{
+        ViewData["Title"] = "dataView";
+        getTableData getData = new getTableData();
+        List<dataTableEntry> data = new List<dataTableEntry>();
+        data = getData.getDataTableEntries(1);
 
+        foreach (dataTableEntry entry in data) {
+            <text>
+            var entry = { App_ID: '@entry.App_ID', App_name: '@entry.App_name', Department: '@entry.Department', DepartmentManager: '@entry.DepartmentManager', Client: '@entry.Client', PrimaryBA: '@entry.PrimaryBA', TechContact: '@entry.TechContact', ApplicationType: '@entry.ApplicationType', Tech: '@entry.Tech', ProductionServer: '@entry.ProductionServer', ProductionURL: '@entry.ProductionURL', QaServer: '@entry.QaServer', QaURL: '@entry.QaURL', DevlopmentServer: '@entry.DevlopmentServer', DevlopmentURL: '@entry.DevlopmentURL', CodeSource: '@entry.CodeSource', Repository: '@entry.Repository', Stability: '@entry.Stability', FutureDevlopment: '@entry.FutureDevlopment', Sensitivity: '@entry.Sensitivity', Criticality: '@entry.Criticality' };
+            data.push(entry);
+            </text>
+        }
+    }
 
     // Find a <table> element with id="myTable":
     var table = document.getElementById("dataTableBody");
@@ -241,7 +244,7 @@
     data.forEach(function (value, i) {
         // Create an empty <tr> element and add it to the 1st position of the table:
         var row = table.insertRow();
-        row.setAttribute("id", `row-${value.App_ID}`); //Sets the row Id to the App ID 
+        row.setAttribute("id", `row-${value.App_ID}`); //Sets the row Id to the App ID
 
 
     // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:

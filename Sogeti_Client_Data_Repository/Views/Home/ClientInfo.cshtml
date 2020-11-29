@@ -4,6 +4,8 @@
 }
 <script>
     var clientData = [];
+    var newClientName = "";
+    var newDescription = "";
 
     function loadData() {
         var table, row, cell, input;
@@ -21,7 +23,29 @@
         }
         console.log(clientData)
 
-       table = document.getElementById("clientTable");
+        table = document.getElementById("clientTable");
+        /*
+        clientData.forEach(function (i) {
+            var row = table.insertRow()
+            row.setAttribute("id", `row-${clientData[i].clientId}`)
+
+            k = 1;
+            Object.keys(value).forEach(function (k, i) {
+                var newCell = row.insertCell(0);
+                newCell.innerHTML = values[k].toString();
+
+            })
+        })
+
+        var rows = document.getElementById('clientTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (i = 0; i < rows.length; i++) {
+            rows[i].onclick = function (m, i) {
+                console.log(this.id.replace("row-", "")); //Logs App ID
+                var tempId = this.id.replace("row-", ""); //Sets a variable to a App ID */
+               // window.location.href = '@Url.Action("getIdForClientApp", "Home")/' + tempId; //Calls A Href
+            //}
+        //}
+
         for (i = 0; i < clientData.length; i++) {
             row = table.insertRow(table.length);
 
@@ -30,9 +54,8 @@
             input = document.createElement('a');
             var linkText = document.createTextNode(clientData[i].clientName);
             input.appendChild(linkText);
-            input.href = "ClientApplications/"
+            input.href = '@Url.Action("getIdForClientApp","Home")/' + clientData[i].clientId;
             input.title = clientData[i].clientName;
-            //input.onclick(sendClientID(clientData[i].clientId));
             cell.appendChild(input);
 
             cell = row.insertCell(1);
@@ -42,10 +65,8 @@
             input.value = clientData[i].description;
             cell.appendChild(input);
         }
+
     }
-   // function sendClientID(id) {
-   //     window.location.href = '@Url.Action("getClientApplications","displayClientApplications")?cliendId=' + id;
-    //}
     function newClient() {
         var table = document.getElementById("clientTable");
         var length = table.rows.length;
@@ -57,8 +78,10 @@
 
         var input1 = document.createElement('input');
         input1.type = 'text';
+        input1.id = 'clientToBeAdded';
         var input2 = document.createElement('input');
         input2.type = 'text';
+        input2.id = 'clientDescriptionToBeAdded';
 
         cell1.appendChild(input1);
         cell2.appendChild(input2);
@@ -97,8 +120,32 @@
             }
         }
     }
-    function saveClient() {
+    function saveNewClient() {
+        newClientName = document.getElementById("clientToBeAdded").value;
+        newDescription = document.getElementById("clientDescriptionToBeAdded").value;
 
+        console.log(newClientName);
+        console.log(newDescription);
+
+        //window.location.href = 'Url.Action("saveClient", "Home")/' + newClientName + '/' + newDescription;
+        $.ajax({
+            type: "POST",
+            url: "saveClient",
+            data: {
+                name: newClientName,
+                description: newDescription
+            },
+            dataType: "json",
+            success: function (response) {
+                alert("success");
+            },
+            failure: function (response) {
+                alert("success");
+            },
+            error: function (response) {
+                alert("success");
+            }
+        })
     }
 </script>
 <head>

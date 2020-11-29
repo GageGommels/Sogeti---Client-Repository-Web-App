@@ -1,33 +1,36 @@
 ﻿@model Sogeti_Client_Data_Repository.Models.Client
 @{
     ViewData["Title"] = "ClientApplications";
+    Client clientForApps = new Client();
+    clientForApps = ViewBag.SelectedClient;
 }
 
 <script>
+    var clientApplications = [];
+
     function loadData() {
          var table, row, cell, input;
 
         @{
-           //displayClientApplications clientApplications = new displayClientApplications();
+           displayClientApplications clientApplications = new displayClientApplications();
 
-            //Client ClientForApps = clientApplications.getClientForApplications(""); //change inputted string
-            Client ClientForApps = new Client("test","test client", "test description");
-
-           // List<ClientApplication> listOfApplications = clientApplications.getClientApplications();
-            //foreach (ClientApplication app in listOfApplications)
-           // {
-             //   <text>
-               //     var app = { applicationName = "@app.ApplicationName", productionURL = "@app.ProductionURL" };
-                //    clientApplications.push(app);
-               // </text>
-           // }
+           List<ClientApplication> listOfApplications = clientApplications.getClientApplications(clientForApps.ClientId);
+           foreach (ClientApplication app in listOfApplications)
+           {
+               <text>
+                  var app = { applicationName : "@app.ApplicationName", productionURL : "@app.ProductionURL" };
+                  clientApplications.push(app);
+               </text>
+           }
         }
-        document.getElementById("clientNameBox").innerHTML.value = "@ClientForApps.ClientName";
-        document.getElementById("clientDescriptionBox").value = "@ClientForApps.Description";
-        console.log("@ClientForApps.ClientName");
-        console.log("@ClientForApps.Description");
+        //appClientName = '@clientForApps.ClientName';
+        //appClientDescription = "@clientForApps.description";
 
-        /*
+        document.getElementById("clientNameBox").value = "@clientForApps.ClientName";
+        document.getElementById("clientDescriptionBox").value = "@clientForApps.Description";
+        //console.log(appClientName);
+        //console.log(appClientDescription);
+
         table = document.getElementById("clientApplicationTable");
         for (i = 0; i < clientApplications.length; i++) {
             row = table.insertRow(table.length);
@@ -46,8 +49,6 @@
             input.value = clientApplications[i].productionURL;
             cell.appendChild(input);
         }
-        */
-
     }
     function newApplication() {
         var table = document.getElementById("clientApplicationTable");
@@ -94,15 +95,15 @@
             }
     </style>
 </head>
-<body onload="loadData()">
+<body onLoad="loadData()">
     <br>
     <br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-4">
-                <div class="border border-dark rounded" id="clientNameBox">
-                    Client Name: 
+                <div class="border border-dark rounded">
+                    Client Name: <input type="text" id="clientNameBox" readonly/>
                 </div>
             </div>
         </div>
@@ -110,7 +111,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 <div class="border border-dark rounded">
-                    Description: <input type="text" id="clientDescriptionBox" />
+                    Description: <input type="text" id="clientDescriptionBox" readonly/>
                 </div>
             </div>
         </div>
