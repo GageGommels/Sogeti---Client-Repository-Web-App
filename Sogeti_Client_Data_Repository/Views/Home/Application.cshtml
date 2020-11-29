@@ -4,7 +4,7 @@
 
 @{
     dataTableEntry getData = new dataTableEntry("Application Name", "Department", "Department Manager", "Client", "Primary BA", "Technical Contact", "Application Type 1,Application Type 2", "Technology 1,Technology 2", "Production Server", "Production URL", "QA Server", "QA URL", "Development Server", "Development URL", "Some Place", "10", "10", "10", "10", "10", 1);
-    getData = ViewBag.Selected; 
+    getData = ViewBag.Selected;
 }
 <script>
 
@@ -40,9 +40,62 @@
             input.type = 'text';
             input.value = data[i];
             cell.appendChild(input);
-        }  
+        }
 
         var prod, qa, dev;
+
+        table = document.getElementById("myUrls");
+        prod = "@getData.ProductionURL".split(",");
+        qa = "@getData.QaURL".split(",");
+        dev = "@getData.DevlopmentURL".split(",");
+        for (i = 0; i < prod.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = 'Production';
+            input.readOnly = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = prod[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < qa.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = 'QA';
+            input.readOnly = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = qa[i];
+            cell.appendChild(input);
+        }
+        for (i = 0; i < dev.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = 'Development';
+            input.readOnly = true;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = dev[i];
+            cell.appendChild(input);
+        }
 
         table = document.getElementById("myServers");
         prod = "@getData.ProductionServer".split(",");
@@ -100,81 +153,15 @@
             cell.appendChild(input);
         }
 
-
-        table = document.getElementById("myUrls");
-        prod = "@getData.ProductionURL".split(",");
-        qa = "@getData.QaURL".split(",");
-        dev = "@getData.DevlopmentURL".split(",");
-        for (i = 0; i < prod.length; i++) {
-            row = table.insertRow(table.length);
-
-            cell = row.insertCell(0);
-            input = document.createElement('select');
-            option = document.createElement('option');
-            option.text = "Production"
-            input.add(option);
-            input.disabled = true;
-            cell.appendChild(input);
-
-            cell = row.insertCell(1);
-            input = document.createElement('input');
-            input.type = 'text';
-            input.value = prod[i];
-            cell.appendChild(input);
-        }
-        for (i = 0; i < qa.length; i++) {
-            row = table.insertRow(table.length);
-
-            cell = row.insertCell(0);
-            input = document.createElement('select');
-            option = document.createElement('option');
-            option.text = "QA"
-            input.add(option);
-            input.disabled = true;
-            cell.appendChild(input);
-
-            cell = row.insertCell(1);
-            input = document.createElement('input');
-            input.type = 'text';
-            input.value = qa[i];
-            cell.appendChild(input);
-        }
-        for (i = 0; i < dev.length; i++) {
-            row = table.insertRow(table.length);
-
-            cell = row.insertCell(0);
-            input = document.createElement('select');
-            option = document.createElement('option');
-            option.text = "Development"
-            input.add(option);
-            input.disabled = true;
-            cell.appendChild(input);
-
-            cell = row.insertCell(1);
-            input = document.createElement('input');
-            input.type = 'text';
-            input.value = dev[i];
-            cell.appendChild(input);
-        }
-
         table = document.getElementById("myNotes");
-        data = "@getData.ApplicationType".split(",");
-        /*for (i = 0; i < data.length; i++) {
-            row = table.insertRow(table.length);
-
-            cell = row.insertCell(0);
-            input = document.createElement('input');
-            input.type = 'text';
-            input.value = data[i];
-            cell.appendChild(input);
-        }*/
+        // note table is not yet implemented
 
         document.getElementById("source").value = "@getData.CodeSource";
-        document.getElementById("stable").value = "@getData.Stability";
-        document.getElementById("future").value = "@getData.FutureDevlopment";
+        document.getElementById("stable").selected = '@getData.Stability';
+        document.getElementById("future").selected = '@getData.FutureDevlopment';
         document.getElementById("repo").value = "@getData.Repository";
-        document.getElementById("sensitive").value = "@getData.Sensitivity";
-        document.getElementById("crit").value = "@getData.Criticality";
+        document.getElementById("sensitive").selected = '@getData.Sensitivity';
+        document.getElementById("crit").selected = '@getData.Criticality';
     }
 
 </script>
@@ -189,13 +176,13 @@
                                 Application Name:
                             </td>
                             <td>
-                                <input type="text" id="appName" name="appName" value="EXAMPLE" readonly>
+                                <input type="text" id="appName" name="appName" value="EXAMPLE">
                             </td>
                             <td>
                                 Client:
                             </td>
                             <td>
-                                <input type="text" id="client" name="client" value="EXAMPLE" readonly>
+                                <input type="text" id="client" name="client" value="EXAMPLE">
                             </td>
                         </tr>
                         <tr>
@@ -203,13 +190,13 @@
                                 Department:
                             </td>
                             <td>
-                                <input type="text" id="dept" name="dept" value="EXAMPLE" readonly>
+                                <input type="text" id="dept" name="dept" value="EXAMPLE">
                             </td>
                             <td>
                                 Primary BA:
                             </td>
                             <td>
-                                <input type="text" id="ba" name="ba" value="EXAMPLE" readonly>
+                                <input type="text" id="ba" name="ba" value="EXAMPLE">
                             </td>
                         </tr>
                         <tr>
@@ -217,17 +204,31 @@
                                 Dept. Manager:
                             </td>
                             <td>
-                                <input type="text" id="deptMgr" name="deptMgr" value="EXAMPLE" readonly>
+                                <input type="text" id="deptMgr" name="deptMgr" value="EXAMPLE">
                             </td>
                             <td>
                                 Tech. Contact:
                             </td>
                             <td>
-                                <input type="text" id="contact" name="contact" value="EXAMPLE" readonly>
+                                <input type="text" id="contact" name="contact" value="EXAMPLE">
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+
+                        <button type="button" class="btn btn-success btn-sm btn-block">
+                            Save
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div><br /></div>
@@ -247,7 +248,7 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <button type="button" class="btn btn-sm btn-block btn-info" onclick="applicationType()">
+                        <button type="button" class="btn btn-sm btn-block btn-info" onclick="addApplicationType()">
                             Add
                         </button>
                     </div>
@@ -274,11 +275,49 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="technology()">
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="addTechnology()">
                             Add
                         </button>
                     </div>
                     <div class="col-md-6">
+
+                        <button type="button" class="btn btn-success btn-block btn-sm">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><br /></div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-sm" id="myUrls">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                URLs
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                URL
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
 
                         <button type="button" class="btn btn-success btn-block btn-sm">
                             Save
@@ -316,49 +355,7 @@
                     </div>
                     <div class="col-md-3">
 
-                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="servers()">
-                            Add
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-
-                        <button type="button" class="btn btn-success btn-block btn-sm">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div><br /></div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered table-sm" id="myUrls">
-                    <thead>
-                        <tr>
-                            <th colspan="2">
-                                URLs
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                Type
-                            </th>
-                            <th>
-                                URL
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-3">
-
-                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="urls()">
+                        <button type="button" class="btn btn-block btn-sm btn-info" onclick="addServers()">
                             Add
                         </button>
                     </div>
@@ -395,13 +392,23 @@
                                 Stability Rating:
                             </td>
                             <td>
-                                <input type="text" id="stable" name="stable" value="EXAMPLE">
+                                <select name="stable" id="stable">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium Low">Medium Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Medium High">Medium High</option>
+                                    <option value="High">High</option>
+                                </select>
                             </td>
                             <td>
                                 Sensitive Data:
                             </td>
                             <td>
-                                <input type="text" id="sensitive" name="sensitive" value="EXAMPLE">
+                                <select name="sensitive" id="sensitive">
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="Partially">Partially</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -409,13 +416,25 @@
                                 Future Dev. Rating:
                             </td>
                             <td>
-                                <input type="text" id="future" name="future" value="EXAMPLE">
+                                <select name="future" id="future">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium Low">Medium Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Medium High">Medium High</option>
+                                    <option value="High">High</option>
+                                </select>
                             </td>
                             <td>
                                 Criticality:
                             </td>
                             <td>
-                                <input type="text" id="crit" name="crit" value="EXAMPLE">
+                                <select name="crit" id="crit">
+                                    <option value="Very Minor">Very Minor</option>
+                                    <option value="Minor">Minor</option>
+                                    <option value="Important">Important</option>
+                                    <option value="Significant">Significant</option>
+                                    <option value="Major">Major</option>
+                                </select>
                             </td>
                         </tr>
                     </tbody>
@@ -429,7 +448,7 @@
                     </div>
                     <div class="col-md-3">
 
-                        <button type="button" class="btn btn-success btn-block btn-sm">
+                        <button type="button" class="btn btn-success btn-block btn-sm" onclick="editCodeSource()">
                             Save
                         </button>
                     </div>
@@ -481,7 +500,7 @@
     </div>
 </body>
 <script>
-    function applicationType() {
+    function addApplicationType() {
         var table = document.getElementById("myApplicationType");
         var length = table.rows.length;
         var row = table.insertRow(length);
@@ -493,7 +512,7 @@
         cell.appendChild(input);
     }
 
-    function technology() {
+    function addTechnology() {
         var table = document.getElementById("myTechnology");
         var length = table.rows.length;
         var row = table.insertRow(length);
@@ -505,33 +524,8 @@
         cell.appendChild(input);
     }
 
-    function servers() {
+    function addServers() {
         var table = document.getElementById("myServers");
-        var length = table.rows.length;
-        var row = table.insertRow(length);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-
-        var input1 = document.createElement('select');
-        var option1 = document.createElement('option');
-        option1.text = "Development";
-        input1.add(option1);
-        var option2 = document.createElement('option');
-        option2.text = "QA";
-        input1.add(option2);
-        var option3 = document.createElement('option');
-        option3.text = "Production";
-        input1.add(option3);      
-
-        var input2 = document.createElement('input');
-        input2.type = 'text';
-
-        cell1.appendChild(input1);
-        cell2.appendChild(input2);
-    }
-
-    function urls() {
-        var table = document.getElementById("myUrls");
         var length = table.rows.length;
         var row = table.insertRow(length);
         var cell1 = row.insertCell(0);
@@ -555,19 +549,116 @@
         cell2.appendChild(input2);
     }
 
-    function notes() {
-        var table = document.getElementById("myNotes");
-        var length = table.rows.length;
-        var row = table.insertRow(length);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
+    function editAppName() {
+        var input = document.getElementById('appName');
 
-        var input1 = document.createElement('input');
-        input1.type = 'text';
-        var input2 = document.createElement('input');
-        input2.type = 'text';
-
-        cell1.appendChild(input1);
-        cell2.appendChild(input2);
     }
+
+    function editDept() {
+        var input = document.getElementById('dept');
+
+    }
+
+    function editDeptMngr() {
+        var input = document.getElementById('deptMgr');
+
+    }
+
+    function editClient() {
+        var input = document.getElementById('client');
+    }
+
+    function editBA() {
+        var input = document.getElementById('ba');
+    }
+
+    function editContact() {
+        var input = document.getElementById('contact');
+    }
+
+    function editAppType() {
+        var table = document.getElementById('myApplicationType');
+    }
+
+    function editTech() {
+        var table = document.getElementById('myTechnology');
+    }
+
+    function editProdURL() {
+        var input = document.getElementById();
+    }
+
+    function editQAURL() {
+        var input = document.getElementById();
+    }
+
+    function editDevURL() {
+        var input = document.getElementById();
+    }
+
+    function editProdServer() {
+        var table = document.getElementById();
+    }
+
+    function editQAServer() {
+        var table = document.getElementById();
+    }
+
+    function editDevServer() {
+        var table = document.getElementById();
+    }
+
+    function editCodeSource() {
+        var input = document.getElementById("source");
+        var form = document.createElement("form");
+
+        var source = input.value;
+//        <href=<%: Url.Action(" GetByList", "Listing", new { name = "John", contact = "calgary, vancouver" }) %>>
+//            window.location.href = 'Url.Action("editCodeSource", "Home")/' + getData.App_ID input.value; //Calls A Href
+
+        var appID = @getData.App_ID;
+        //window.location.href = 'Url.Action("editCodeSource", "Home")/' + new {appID, input.value};
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/editCodeSource",
+            data: {
+                ID: @getData.App_ID,
+                codeSource: input.value
+            },
+            dataType: "json",
+            success: function (response) {
+                alert("success");
+            },
+            failure: function (response) {
+                alert("fail");
+            },
+            error: function (response) {
+                alert("error");
+            }
+
+        });
+
+    }
+
+    function editRepository() {
+        var input = document.getElementById();
+    }
+
+    function editStability() {
+        var input = document.getElementById();
+    }
+
+    function editSensitive() {
+        var input = document.getElementById();
+    }
+
+    function editFuture() {
+        var input = document.getElementById();
+    }
+
+    function editCrit() {
+        var input = document.getElementById();
+    }
+
 </script>

@@ -158,6 +158,18 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View("Application");
         }
 
+        [HttpPost]
+        public void editCodeSource(int ID, string codeSource)
+        {
+            getTableData getData = new getTableData();
+
+            Debug.WriteLine("ID: " + ID + ", Code_Source: " + codeSource);
+
+            getData.editCodeSource(ID, codeSource);
+
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

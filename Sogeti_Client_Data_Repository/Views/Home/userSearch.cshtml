@@ -1,0 +1,146 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "User Search";
+}
+
+<head>
+    <style>
+        .table-fixed tbody {
+            height: 300px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .table-fixed thead,
+        .table-fixed tbody,
+        .table-fixed tr,
+        .table-fixed td,
+        .table-fixed th {
+            display: block;
+        }
+
+            .table-fixed tbody td,
+            .table-fixed tbody th,
+            .table-fixed thead > tr > th {
+                float: left;
+                position: relative;
+            }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form class="form-inline">
+                    <div class="col-md-2">
+                        <input type="text" name="userFirstName" placeholder="User First Name">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" name="userLastName" placeholder="User Last Name">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn-block"> Search </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-bordered table-hover table-fixed">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-3">User First Names</th>
+                            <th scope="col" class="col-3">User Last Names</th>
+                            <th scope="col" class="col-6">Usernames</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="col-3">User First Name 1</td>
+                            <td scope="col" class="col-3">User Last Name 1</td>
+                            <td scope="col" class="col-3">Username 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn-block">
+                            New User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var userFirstName = document.querySelector("userFirstName");
+
+    userFirstName.addEventListener("keyup", function (b) {
+        var search_name = e.target.value.toLowerCase();
+        var search_nameInit = document.querySelectorAll(".table_body .name")
+
+        search_nameInit.forEach(function (item)){
+            if (item.textContent.toLowerCase().indexOf(userFirstName) != -1) {
+                item.closest("col").style.display = "block"
+            }
+            else {
+                item.closest("col").style.display = "none"
+            }
+        }
+    }
+</script>
