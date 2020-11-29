@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
@@ -45,12 +46,8 @@ namespace Sogeti_Client_Data_Repository.Models
                                 newClient.ClientId = sqlReader.GetInt32(0).ToString();
                                 newClient.ClientName = sqlReader.GetString(1);
                                 newClient.Description = sqlReader.GetString(2);
-                                //Client newClient = new Client(sqlReader.GetInt32(0), sqlReader.GetString(1), sqlReader.GetString(2));
 
-
-                                data.Add(newClient);
-                                //data += "<tr><td scope='col' class='col-3'><a href='ClientApplications/'>" + name + "</a></td><td scope='col' class='col-9'>" + description + "</td></tr>";
-                                
+                                data.Add(newClient); 
                             }
                         }
                     }
@@ -63,6 +60,95 @@ namespace Sogeti_Client_Data_Repository.Models
                 con.Close();
             }
             return data;
+        }
+
+        public Client getAppClient(string id)
+        {
+            Client newClient = new Client();
+            SqlCommand com = new SqlCommand("Get_ClientInfoFromID", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ClientID", Int32.Parse(id));
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    using (SqlDataReader sqlReader = com.ExecuteReader())
+                    {
+                        while (sqlReader.Read())
+                        {
+                            newClient.ClientId = id;
+                            newClient.ClientName = sqlReader.GetString(0);
+                            newClient.Description = sqlReader.GetString(1);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            { }
+            finally
+            {
+                con.Close();
+            }
+            return newClient;
+        }
+
+        public void saveClient(string name, string description)
+        {
+            SqlCommand com = new SqlCommand("Insert_Client", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Name", name);
+            com.Parameters.AddWithValue("@Description", description);
+            com.Parameters.AddWithValue("@Client_ID", 1);
+
+            int response = -1;
+            try
+            {
+                using(con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            if (response == 1)
+            {
+                Debug.WriteLine("client added");
+            }
+            else
+            {
+                Debug.WriteLine("client add failed");
+            }
+
+            /*
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    using (SqlDataReader sqlReader = com.ExecuteReader())
+                    {
+                        while (sqlReader.Read())
+                        {
+                            var id = sqlReader.GetString(0);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            { }
+            finally
+            {
+                con.Close();
+            }
+            */
         }
     }
 }

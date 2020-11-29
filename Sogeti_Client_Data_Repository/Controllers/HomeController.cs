@@ -27,7 +27,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
-        public IActionResult displayClients([Bind] Client client)
+        public IActionResult displayClients()
         {       
             return View();
         }
@@ -35,6 +35,20 @@ namespace Sogeti_Client_Data_Repository.Controllers
         public IActionResult ClientApplications()
         {
             return View();
+        }
+
+        public IActionResult getIdForClientApp(string id)
+        {
+            displayClients clientInfo = new displayClients();
+            ViewBag.SelectedClient = clientInfo.getAppClient(id);
+            return View("ClientApplications");
+        }
+
+        [HttpPost]
+        public void saveClient(string name, string description)
+        {
+            displayClients clientInfo = new displayClients();
+            clientInfo.saveClient(name, description);
         }
 
         public IActionResult Index()
