@@ -139,7 +139,10 @@ namespace Sogeti_Client_Data_Repository.Controllers
         public IActionResult check(int id)
         {
             getTableData getData = new getTableData();
-            ViewBag.Selected = getData.testData(id);
+            List<dataTableEntry> data = new List<dataTableEntry>();
+            data = getData.getDataTableEntries(1);
+            var reponse = data.Find(r => r.App_ID == id);
+            ViewBag.Selected = reponse;
             Debug.WriteLine(id);
             return View("Application");
         }
