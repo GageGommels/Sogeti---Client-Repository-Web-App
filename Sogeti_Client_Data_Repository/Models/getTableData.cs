@@ -84,7 +84,7 @@ namespace Sogeti_Client_Data_Repository.Models
                             SqlCommand com2 = new SqlCommand("Get_ApplicationServers", con);
                             com2.CommandType = CommandType.StoredProcedure;
                             com2.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
-                            Debug.WriteLine("APP ID  " + entry.App_ID);
+                            /*Debug.WriteLine("APP ID  " + entry.App_ID);*/
                             using (SqlDataReader sqlReader2 = com2.ExecuteReader())
                             {
                                 if (sqlReader2.HasRows)
@@ -130,14 +130,14 @@ namespace Sogeti_Client_Data_Repository.Models
                                         if (sqlReader3.GetString(2) == "PrimaryBA")
                                         {
                                             string PrimaryBA = sqlReader3.GetString(0) + " " + sqlReader3.GetString(1);
-                                            Debug.WriteLine("PRIMARY BA " + PrimaryBA);
+                                            /*Debug.WriteLine("PRIMARY BA " + PrimaryBA);*/
                                             entry.PrimaryBA = PrimaryBA;
                                         }
                                         else if (sqlReader3.GetString(0) == "Technical")
                                         {
 
                                             string Technical = sqlReader3.GetString(0) + " " + sqlReader3.GetString(1);
-                                            Debug.WriteLine("TECHNICAL " + Technical);
+                                            /*Debug.WriteLine("TECHNICAL " + Technical);*/
                                             entry.TechContact = Technical;
                                         }
                                     }
@@ -166,17 +166,17 @@ namespace Sogeti_Client_Data_Repository.Models
                                         if (sqlReader4.GetString(0) == "DEV")
                                         {
                                             entry.DevlopmentURL = sqlReader4.GetString(1);
-                                            Debug.WriteLine("DEVURL " + entry.DevlopmentURL);
+                                            /*Debug.WriteLine("DEVURL " + entry.DevlopmentURL);*/
                                         }
                                         else if (sqlReader4.GetString(0) == "PROD")
                                         {
                                             entry.ProductionURL = sqlReader4.GetString(1);
-                                            Debug.WriteLine("PRODURL " + entry.ProductionURL);
+                                            /*Debug.WriteLine("PRODURL " + entry.ProductionURL);*/
                                         }
                                         else if (sqlReader4.GetString(0) == "QA")
                                         {
                                             entry.QaURL = sqlReader4.GetString(1);
-                                            Debug.WriteLine("QAURL " + entry.QaURL);
+                                            /*Debug.WriteLine("QAURL " + entry.QaURL);*/
                                         }
                                     }
                                 }
@@ -198,7 +198,7 @@ namespace Sogeti_Client_Data_Repository.Models
             }
             foreach (dataTableEntry entry in data)
             {
-                Debug.WriteLine(entry.App_name + " || " + entry.App_ID + " || " + entry.Criticality + " || " + entry.Department + " || " + entry.DevlopmentServer + " ||  " + entry.DevlopmentURL);
+                /*Debug.WriteLine(entry.App_name + " || " + entry.App_ID + " || " + entry.Criticality + " || " + entry.Department + " || " + entry.DevlopmentServer + " ||  " + entry.DevlopmentURL);*/
             }
             return data;
         }

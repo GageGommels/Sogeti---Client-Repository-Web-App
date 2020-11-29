@@ -157,7 +157,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
             data = getData.getDataTableEntries(1);
             var reponse = data.Find(r => r.App_ID == id);
             ViewBag.Selected = reponse;
-            Debug.WriteLine(id);
+            /*Debug.WriteLine(id);*/
             return View("Application");
         }
 
