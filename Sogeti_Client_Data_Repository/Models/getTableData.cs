@@ -196,16 +196,16 @@ namespace Sogeti_Client_Data_Repository.Models
             return newEntry4;
 
         }
-
-        public void editCodeSource(int ID, string codeSource)
+        public void editDept(int ID, string dept, string first, string last)
         {
-            SqlCommand com = new SqlCommand("Update_CodeSource", con);       //Check_Password is the name of the Stored Procedure
+            SqlCommand com = new SqlCommand("Update_Department", con);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@ApplicationID", ID);
-            com.Parameters.AddWithValue("@CodeSource_ID", 1);
-            com.Parameters.AddWithValue("@CodeSource", codeSource);    //@Username is an Input Parameter to the Proc
+            com.Parameters.AddWithValue("@DeparmentName", dept);
+            com.Parameters.AddWithValue("@ContactFirst", first);
+            com.Parameters.AddWithValue("@ContactLast", last);
 
-            int response = -1;
+            int response;
             try
             {
                 using (con)
@@ -222,15 +222,302 @@ namespace Sogeti_Client_Data_Repository.Models
             {
                 con.Close();
             }
-            if (response == 1)
+        }
+
+
+        public void editBA(int ID, string first, string last)
+        {
+            SqlCommand com = new SqlCommand("Update_BA", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@FirstName", first);
+            com.Parameters.AddWithValue("@LastName", last);
+
+            int response;
+            try
             {
-                Debug.WriteLine("CodeSource Edited");
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
             }
-            else
+            catch (Exception e)
             {
-                Debug.WriteLine("CodeSource Edit Failed");
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
             }
         }
 
+        public void editContact(int ID, string first, string last)
+        {
+            SqlCommand com = new SqlCommand("Update_TechnicalContact", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@FirstName", first);
+            com.Parameters.AddWithValue("@LastName", last);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editAppType(int ID, string app)
+        {
+            SqlCommand com = new SqlCommand("Update_Type", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@Types", app); 
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editTech(int ID, string tech)
+        {
+            SqlCommand com = new SqlCommand("Update_Technology", con);     
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@Technologies", tech);   
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editURL(int ID, string prod, string qa, string dev)
+        {
+            SqlCommand com = new SqlCommand("Update_URL", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Application_ID", ID);
+            com.Parameters.AddWithValue("@PROD_URL", prod);
+            com.Parameters.AddWithValue("@DEV_URL", qa);
+            com.Parameters.AddWithValue("@QA_URL", dev);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editProdServer(int ID, string prod)
+        {
+            SqlCommand com = new SqlCommand("Update_ProdServers", con);       
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@ProdServers", prod);    
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editQAServer(int ID, string qa)
+        {
+            SqlCommand com = new SqlCommand("Update_QAServers", con);       
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@QAServers", qa);    
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editDevServer(int ID, string dev)
+        {
+            SqlCommand com = new SqlCommand("Update_DevServers", con); 
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@DevServers", dev);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editSource(int ID, string source)
+        {
+            SqlCommand com = new SqlCommand("Update_CodeSource", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@CodeSource_ID", 1);
+            com.Parameters.AddWithValue("@CodeSource", source);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editRepo(int ID, string repo)
+        {
+            SqlCommand com = new SqlCommand("Update_Repository", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@Repository_ID", 1);
+            com.Parameters.AddWithValue("@Repository", repo);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void editApplication(int ID, int crit, int future, int stable, int sensitive)
+        {
+            SqlCommand com = new SqlCommand("Update_Application", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@Criticality_ID", crit);
+            com.Parameters.AddWithValue("@DevelopmentRating_ID", future);
+            com.Parameters.AddWithValue("@Stability_ID", stable);
+            com.Parameters.AddWithValue("@Sensitivity_ID", sensitive);
+
+            int response;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }
