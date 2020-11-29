@@ -43,36 +43,49 @@ namespace Sogeti_Client_Data_Repository.Models
                     {
                         if (sqlReader.HasRows)
                         {
-                            while (sqlReader.Read())
+                            try
                             {
-                                dataTableEntry newEntry = new dataTableEntry();
+                                while (sqlReader.Read())
+                                {
+                                    dataTableEntry newEntry = new dataTableEntry();
 
-                                newEntry.App_ID = sqlReader.GetInt32(0);
-                                newEntry.App_name = sqlReader.GetString(1);
-                                newEntry.Department = sqlReader.GetString(2);
-                                string DeptManager = sqlReader.GetString(3) + " " + sqlReader.GetString(4);
-                                newEntry.DepartmentManager = DeptManager;
-                                newEntry.Client = sqlReader.GetString(5);
-                                newEntry.Criticality = sqlReader.GetString(6);
-                                newEntry.FutureDevlopment = sqlReader.GetString(7);
-                                newEntry.Stability = sqlReader.GetString(8);
-                                newEntry.Sensitivity = sqlReader.GetString(9);
-                                newEntry.Repository = sqlReader.GetString(10);
-                                newEntry.CodeSource = sqlReader.GetString(11);
-                                newEntry.ApplicationType = sqlReader.GetString(12);
-                                newEntry.Tech = sqlReader.GetString(13);
+                                    newEntry.App_ID = (int)sqlReader["ApplicationID"];
+                                    newEntry.App_name = (string)sqlReader["ApplicationName"];
+                                    newEntry.Department = (string)sqlReader["DepartmentName"];
+                                    string DeptManager = (string)sqlReader["DepartmentManagerFirstName"] + " " + (string)sqlReader["DepartmentManagerLastName"];
+                                    newEntry.DepartmentManager = DeptManager;
+                                    newEntry.Client = (string)sqlReader["ClientName"];
+                                    newEntry.Criticality = (string)sqlReader["Criticality"];
+                                    newEntry.FutureDevlopment = (string)sqlReader["Development"];
+                                    newEntry.Stability = (string)sqlReader["Stability"];
+                                    newEntry.Sensitivity = (string)sqlReader["Sensitivity"];
+                                    newEntry.Repository = (string)sqlReader["Repository"];
+                                    newEntry.CodeSource = (string)sqlReader["CodeSource"];
+                                    newEntry.ApplicationType = (string)sqlReader["ApplicationType"];
+                                    newEntry.Tech = (string)sqlReader["ApplicationTech"];
 
-                                
-                                //Append Object too array
-                                data.Add(newEntry);
 
+                                    //Append Object too array
+                                    data.Add(newEntry);
+
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine(e.Message);
                             }
                         }
-                        com = new SqlCommand("Get_ApplicationServers", con);
-                        foreach (dataTableEntry entry in data)
+                    }
+
+                    foreach (dataTableEntry entry in data)
+                    {
+                        try
                         {
-                            com.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
-                            using (SqlDataReader sqlReader2 = com.ExecuteReader())
+                            SqlCommand com2 = new SqlCommand("Get_ApplicationServers", con);
+                            com2.CommandType = CommandType.StoredProcedure;
+                            com2.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
+                            Debug.WriteLine("APP ID  " + entry.App_ID);
+                            using (SqlDataReader sqlReader2 = com2.ExecuteReader())
                             {
                                 if (sqlReader2.HasRows)
                                 {
@@ -89,16 +102,26 @@ namespace Sogeti_Client_Data_Repository.Models
                                         else if (sqlReader2.GetString(0) == "QA")
                                         {
                                             entry.QaServer = sqlReader2.GetString(1);
+                                            Debug.WriteLine("QASERVER " + entry.QaServer);
                                         }
                                     }
                                 }
-                            }  
+                            }
                         }
-                        com = new SqlCommand("Get_ApplicationContacts", con);
-                        foreach (dataTableEntry entry in data)
+                        catch (Exception e)
                         {
-                            com.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
-                            using (SqlDataReader sqlReader3 = com.ExecuteReader())
+                            Debug.WriteLine(e.Message);
+                        }
+                    }
+
+                    foreach (dataTableEntry entry in data)
+                    {
+                        try
+                        {
+                            SqlCommand com3 = new SqlCommand("Get_ApplicationContacts", con);
+                            com3.CommandType = CommandType.StoredProcedure;
+                            com3.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
+                            using (SqlDataReader sqlReader3 = com3.ExecuteReader())
                             {
                                 if (sqlReader3.HasRows)
                                 {
@@ -107,22 +130,34 @@ namespace Sogeti_Client_Data_Repository.Models
                                         if (sqlReader3.GetString(2) == "PrimaryBA")
                                         {
                                             string PrimaryBA = sqlReader3.GetString(0) + " " + sqlReader3.GetString(1);
+                                            Debug.WriteLine("PRIMARY BA " + PrimaryBA);
                                             entry.PrimaryBA = PrimaryBA;
                                         }
                                         else if (sqlReader3.GetString(0) == "Technical")
                                         {
+
                                             string Technical = sqlReader3.GetString(0) + " " + sqlReader3.GetString(1);
+                                            Debug.WriteLine("TECHNICAL " + Technical);
                                             entry.TechContact = Technical;
                                         }
                                     }
                                 }
                             }
                         }
-                        com = new SqlCommand("Get_ApplicationUrl", con);
-                        foreach (dataTableEntry entry in data)
+                        catch (Exception e)
                         {
-                            com.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
-                            using (SqlDataReader sqlReader4 = com.ExecuteReader())
+                            Debug.WriteLine(e.Message);
+                        }
+                    }
+
+                    foreach (dataTableEntry entry in data)
+                    {
+                        try
+                        {
+                            SqlCommand com4 = new SqlCommand("Get_ApplicationUrl", con);
+                            com4.CommandType = CommandType.StoredProcedure;
+                            com4.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
+                            using (SqlDataReader sqlReader4 = com4.ExecuteReader())
                             {
                                 if (sqlReader4.HasRows)
                                 {
@@ -131,21 +166,29 @@ namespace Sogeti_Client_Data_Repository.Models
                                         if (sqlReader4.GetString(0) == "DEV")
                                         {
                                             entry.DevlopmentURL = sqlReader4.GetString(1);
+                                            Debug.WriteLine("DEVURL " + entry.DevlopmentURL);
                                         }
                                         else if (sqlReader4.GetString(0) == "PROD")
                                         {
                                             entry.ProductionURL = sqlReader4.GetString(1);
+                                            Debug.WriteLine("PRODURL " + entry.ProductionURL);
                                         }
                                         else if (sqlReader4.GetString(0) == "QA")
                                         {
                                             entry.QaURL = sqlReader4.GetString(1);
+                                            Debug.WriteLine("QAURL " + entry.QaURL);
                                         }
                                     }
                                 }
                             }
                         }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.Message);
+                        }
                     }
                 }
+                
             }
             catch (Exception e)
             {}
@@ -155,7 +198,7 @@ namespace Sogeti_Client_Data_Repository.Models
             }
             foreach (dataTableEntry entry in data)
             {
-                Debug.WriteLine(entry.App_name + " || " + entry.App_ID);
+                Debug.WriteLine(entry.App_name + " || " + entry.App_ID + " || " + entry.Criticality + " || " + entry.Department + " || " + entry.DevlopmentServer + " ||  " + entry.DevlopmentURL);
             }
             return data;
         }
