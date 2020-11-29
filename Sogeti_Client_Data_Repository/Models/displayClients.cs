@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
@@ -23,9 +25,9 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
-        public string getClientInfo()
+        public List<Client> getClientInfo()
         {
-            string data = "";
+            List<Client> data = new List<Client>();
 
             SqlCommand com = new SqlCommand("get_ClientInfo", con);
             com.CommandType = CommandType.StoredProcedure;
@@ -40,21 +42,19 @@ namespace Sogeti_Client_Data_Repository.Models
                         {
                             while (sqlReader.Read())
                             {
-                                int clientID = sqlReader.GetInt32(0);
-                                string name = sqlReader.GetString(1);
-                                string description = sqlReader.GetString(2);
+                                Client newClient = new Client();
+                                newClient.ClientId = sqlReader.GetInt32(0).ToString();
+                                newClient.ClientName = sqlReader.GetString(1);
+                                newClient.Description = sqlReader.GetString(2);
 
-                                data += "<tr><td scope='col' class='col-3'><a href='ClientApplications/'>" + name + "</a></td><td scope='col' class='col-9'>" + description + "</td></tr>";
-                                
+                                data.Add(newClient); 
                             }
                         }
                     }
                 }
             }
             catch (Exception e)
-            {
-                return e.Message;
-            }
+            { }
             finally
             {
                 con.Close();
@@ -62,15 +62,12 @@ namespace Sogeti_Client_Data_Repository.Models
             return data;
         }
 
-        public string getClientSearchInfo(Client client)
+        public Client getAppClient(string id)
         {
-            string data = "";
-
-            SqlCommand com = new SqlCommand("get_ClientSearchInfo", con);
+            Client newClient = new Client();
+            SqlCommand com = new SqlCommand("Get_ClientInfoFromID", con);
             com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@Name", client.ClientName);
-            com.Parameters.AddWithValue("@Description", client.Description);
-
+            com.Parameters.AddWithValue("@ClientID", Int32.Parse(id));
             try
             {
                 using (con)
@@ -78,29 +75,80 @@ namespace Sogeti_Client_Data_Repository.Models
                     con.Open();
                     using (SqlDataReader sqlReader = com.ExecuteReader())
                     {
-                        if (sqlReader.HasRows)
+                        while (sqlReader.Read())
                         {
-                            while (sqlReader.Read())
-                            {
-                                int clientID = sqlReader.GetInt32(0);
-                                string name = sqlReader.GetString(1);
-                                string description = sqlReader.GetString(2);
-
-                                data += "<tr><td scope='col' class='col-3'><a href='ClientApplications/'>" + name + "</a></td><td scope='col' class='col-9'>" + description + "</td></tr>";
-                            }
+                            newClient.ClientId = id;
+                            newClient.ClientName = sqlReader.GetString(0);
+                            newClient.Description = sqlReader.GetString(1);
                         }
                     }
                 }
             }
             catch (Exception e)
+            { }
+            finally
             {
-                return e.Message;
+                con.Close();
+            }
+            return newClient;
+        }
+
+        public void saveClient(string name, string description)
+        {
+            SqlCommand com = new SqlCommand("Insert_Client", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@Name", name);
+            com.Parameters.AddWithValue("@Description", description);
+            com.Parameters.AddWithValue("@Client_ID", 1);
+
+            int response = -1;
+            try
+            {
+                using(con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
             finally
             {
                 con.Close();
             }
-            return data;
+            if (response == 1)
+            {
+                Debug.WriteLine("client added");
+            }
+            else
+            {
+                Debug.WriteLine("client add failed");
+            }
+
+            /*
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    using (SqlDataReader sqlReader = com.ExecuteReader())
+                    {
+                        while (sqlReader.Read())
+                        {
+                            var id = sqlReader.GetString(0);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            { }
+            finally
+            {
+                con.Close();
+            }
+            */
         }
     }
 }

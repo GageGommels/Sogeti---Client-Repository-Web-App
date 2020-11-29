@@ -27,7 +27,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
-        public IActionResult displayClients([Bind] Client client)
+        public IActionResult displayClients()
         {       
             return View();
         }
@@ -35,6 +35,20 @@ namespace Sogeti_Client_Data_Repository.Controllers
         public IActionResult ClientApplications()
         {
             return View();
+        }
+
+        public IActionResult getIdForClientApp(string id)
+        {
+            displayClients clientInfo = new displayClients();
+            ViewBag.SelectedClient = clientInfo.getAppClient(id);
+            return View("ClientApplications");
+        }
+
+        [HttpPost]
+        public void saveClient(string name, string description)
+        {
+            displayClients clientInfo = new displayClients();
+            clientInfo.saveClient(name, description);
         }
 
         public IActionResult Index()
@@ -146,6 +160,18 @@ namespace Sogeti_Client_Data_Repository.Controllers
             Debug.WriteLine(id);
             return View("Application");
         }
+
+        [HttpPost]
+        public void editCodeSource(int ID, string codeSource)
+        {
+            getTableData getData = new getTableData();
+
+            Debug.WriteLine("ID: " + ID + ", Code_Source: " + codeSource);
+
+            getData.editCodeSource(ID, codeSource);
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

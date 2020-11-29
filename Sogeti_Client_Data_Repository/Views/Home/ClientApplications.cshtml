@@ -1,9 +1,76 @@
-﻿@{
+﻿@model Sogeti_Client_Data_Repository.Models.Client
+@{
     ViewData["Title"] = "ClientApplications";
+    Client clientForApps = new Client();
+    clientForApps = ViewBag.SelectedClient;
 }
 
-//new client page
+<script>
+    var clientApplications = [];
 
+    function loadData() {
+         var table, row, cell, input;
+
+        @{
+           displayClientApplications clientApplications = new displayClientApplications();
+
+           List<ClientApplication> listOfApplications = clientApplications.getClientApplications(clientForApps.ClientId);
+           foreach (ClientApplication app in listOfApplications)
+           {
+               <text>
+                  var app = { applicationName : "@app.ApplicationName", productionURL : "@app.ProductionURL" };
+                  clientApplications.push(app);
+               </text>
+           }
+        }
+        //appClientName = '@clientForApps.ClientName';
+        //appClientDescription = "@clientForApps.description";
+
+        document.getElementById("clientNameBox").value = "@clientForApps.ClientName";
+        document.getElementById("clientDescriptionBox").value = "@clientForApps.Description";
+        //console.log(appClientName);
+        //console.log(appClientDescription);
+
+        table = document.getElementById("clientApplicationTable");
+        for (i = 0; i < clientApplications.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            cell.setAttribute("class", "col-3");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = clientApplications[i].applicationName;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            cell.setAttribute("class", "col-9");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = clientApplications[i].productionURL;
+            cell.appendChild(input);
+        }
+    }
+    function newApplication() {
+        var table = document.getElementById("clientApplicationTable");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.setAttribute("class", "col-3");
+        cell2.setAttribute("class", "col-9");
+
+        var input1 = document.createElement('input');
+        input1.type = 'text';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+
+        cell1.appendChild(input1);
+        cell2.appendChild(input2);
+    }
+    function saveNewApplication() {
+
+    }
+</script>
 <head>
     <style>
         .table-fixed tbody {
@@ -20,15 +87,15 @@
             display: block;
         }
 
-        .table-fixed tbody td,
-        .table-fixed tbody th,
-        .table-fixed thead > tr > th {
-            float: left;
-            position: relative;
-        }
+            .table-fixed tbody td,
+            .table-fixed tbody th,
+            .table-fixed thead > tr > th {
+                float: left;
+                position: relative;
+            }
     </style>
 </head>
-<body>
+<body onLoad="loadData()">
     <br>
     <br>
     <div class="container-fluid">
@@ -36,7 +103,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 <div class="border border-dark rounded">
-                    Client Name: Example Name
+                    Client Name: <input type="text" id="clientNameBox" readonly/>
                 </div>
             </div>
         </div>
@@ -44,7 +111,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 <div class="border border-dark rounded">
-                    Description: Example Description
+                    Description: <input type="text" id="clientDescriptionBox" readonly/>
                 </div>
             </div>
         </div>
@@ -55,19 +122,11 @@
                 <table class="table table-bordered table-hover table-fixed">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-6">Application Name </th>
-                            <th scope="col" class="col-6">Production URL </th>
+                            <th scope="col" class="col-4">Application Name </th>
+                            <th scope="col" class="col-8">Production URL </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="col" class="col-6">Application 1</td>
-                            <td scope="col" class="col-6">Production</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-6">Application 1</td>
-                            <td scope="col" class="col-6">Production</td>
-                        </tr>
+                    <tbody id="clientApplicationTable">
                     </tbody>
                 </table>
             </div>
@@ -77,12 +136,12 @@
                 <div class="row">
                     <div class="col-md-6"></div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-info btn-block">
+                        <button type="button" class="btn btn-info btn-block" onclick="newApplication()">
                             Add
                         </button>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-info btn-block">
+                        <button type="button" class="btn btn-info btn-block" onclick="saveNewApplication()">
                             Save
                         </button>
                     </div>

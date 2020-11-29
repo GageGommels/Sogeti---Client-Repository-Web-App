@@ -1,8 +1,153 @@
-﻿@model Sogeti_Client_Data_Repository.Models.displayClients
+﻿@model Sogeti_Client_Data_Repository.Models.displayClientApplications;
 @{
     ViewData["Title"] = "ClientInfo";
 }
+<script>
+    var clientData = [];
+    var newClientName = "";
+    var newDescription = "";
 
+    function loadData() {
+        var table, row, cell, input;
+
+        @{
+            displayClients clientData = new displayClients();
+            List<Client> htmlData = clientData.getClientInfo();
+
+            foreach (Client entry in htmlData) {
+            <text>
+                var entry = { clientId : '@entry.ClientId', clientName : '@entry.ClientName', description: '@entry.Description' };
+                clientData.push(entry);
+            </text>
+            }
+        }
+        console.log(clientData)
+
+        table = document.getElementById("clientTable");
+        /*
+        clientData.forEach(function (i) {
+            var row = table.insertRow()
+            row.setAttribute("id", `row-${clientData[i].clientId}`)
+
+            k = 1;
+            Object.keys(value).forEach(function (k, i) {
+                var newCell = row.insertCell(0);
+                newCell.innerHTML = values[k].toString();
+
+            })
+        })
+
+        var rows = document.getElementById('clientTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (i = 0; i < rows.length; i++) {
+            rows[i].onclick = function (m, i) {
+                console.log(this.id.replace("row-", "")); //Logs App ID
+                var tempId = this.id.replace("row-", ""); //Sets a variable to a App ID */
+               // window.location.href = '@Url.Action("getIdForClientApp", "Home")/' + tempId; //Calls A Href
+            //}
+        //}
+
+        for (i = 0; i < clientData.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            cell.setAttribute("class", "col-3");
+            input = document.createElement('a');
+            var linkText = document.createTextNode(clientData[i].clientName);
+            input.appendChild(linkText);
+            input.href = '@Url.Action("getIdForClientApp","Home")/' + clientData[i].clientId;
+            input.title = clientData[i].clientName;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            cell.setAttribute("class", "col-9");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = clientData[i].description;
+            cell.appendChild(input);
+        }
+
+    }
+    function newClient() {
+        var table = document.getElementById("clientTable");
+        var length = table.rows.length;
+        var row = table.insertRow(length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.setAttribute("class", "col-3");
+        cell2.setAttribute("class", "col-9");
+
+        var input1 = document.createElement('input');
+        input1.type = 'text';
+        input1.id = 'clientToBeAdded';
+        var input2 = document.createElement('input');
+        input2.type = 'text';
+        input2.id = 'clientDescriptionToBeAdded';
+
+        cell1.appendChild(input1);
+        cell2.appendChild(input2);
+    }
+
+    function searchForClient() {
+        var clientToSearchFor = document.getElementById("clientToSearchFor").value;
+        var descriptionToSearchFor = document.getElementById("descriptionToSearchFor").value;
+        table = document.getElementById("clientTable");
+        table.innerHTML = "";
+
+        console.log(clientData.length);
+
+        for (i = 0; i < clientData.length; i++) {
+            if (clientData[i].clientName.includes(clientToSearchFor)
+                || clientData[i].description.includes(descriptionToSearchFor)) {
+
+                console.log("true")
+
+                row = table.insertRow(table.length);
+                cell = row.insertCell(0);
+                cell.setAttribute("class", "col-3");
+                input = document.createElement('a');
+                var linkText = document.createTextNode(clientData[i].clientName);
+                input.appendChild(linkText);
+                input.href = "ClientApplications/"
+                input.title = clientData[i].clientName;
+                cell.appendChild(input);
+
+                cell = row.insertCell(1);
+                cell.setAttribute("class", "col-9");
+                input = document.createElement('input');
+                input.type = 'text';
+                input.value = clientData[i].description;
+                cell.appendChild(input);
+            }
+        }
+    }
+    function saveNewClient() {
+        newClientName = document.getElementById("clientToBeAdded").value;
+        newDescription = document.getElementById("clientDescriptionToBeAdded").value;
+
+        console.log(newClientName);
+        console.log(newDescription);
+
+        //window.location.href = 'Url.Action("saveClient", "Home")/' + newClientName + '/' + newDescription;
+        $.ajax({
+            type: "POST",
+            url: "saveClient",
+            data: {
+                name: newClientName,
+                description: newDescription
+            },
+            dataType: "json",
+            success: function (response) {
+                alert("success");
+            },
+            failure: function (response) {
+                alert("success");
+            },
+            error: function (response) {
+                alert("success");
+            }
+        })
+    }
+</script>
 <head>
     <style>
         .table-fixed tbody {
@@ -27,36 +172,55 @@
             }
     </style>
 </head>
-<body>
+<body onLoad="loadData()">
     <br>
     <br>
     <div class="container-fluid">
-
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form class="form-inline">
+                    <div class="col-md-2">
+                        <input id="clientToSearchFor" type="text" placeholder="Client Name">
+                    </div>
+                    <div class="col-md-5">
+                        <input id="descriptionToSearchFor" type="text" placeholder="Description">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-info btn-block" value='Search' onclick="searchForClient()">
+                    </div>
+                </form>
+            </div>
+        </div>
         <br>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <form id="tableForm" runat="server">
-                    <table class="table table-bordered table-hover table-fixed">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="col-3">Client Names</th>
-                                <th scope="col" class="col-9">Descriptions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableData">
-                        </tbody>
-                    </table>
-                </form>
+                <table class="table table-bordered table-hover table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="col-3">Client Names</th>
+                            <th class="col-9">Descriptions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientTable">
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-8"></div>
+                    <div class="col-md-6"></div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-info btn-block">
+                        <button type="button" class="btn btn-info btn-block" onclick="newClient()">
                             New Client
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info btn-block" onclick="saveNewClient()">
+                            Save
                         </button>
                     </div>
                 </div>
@@ -64,15 +228,3 @@
         </div>
     </div>
 </body>
-<script>
-    //function loadData() {
-        var data = "";
-        @{
-            displayClients clientData = new displayClients();
-            String htmlData = clientData.getClientInfo();
-        }
-    var data = '@htmlData';
-    console.log(data);
-    document.getElementById('tableData').innerhtml += data;
-   // }
-</script>

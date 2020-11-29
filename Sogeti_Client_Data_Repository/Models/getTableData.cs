@@ -197,6 +197,40 @@ namespace Sogeti_Client_Data_Repository.Models
 
         }
 
+        public void editCodeSource(int ID, string codeSource)
+        {
+            SqlCommand com = new SqlCommand("Update_CodeSource", con);       //Check_Password is the name of the Stored Procedure
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@ApplicationID", ID);
+            com.Parameters.AddWithValue("@CodeSource_ID", 1);
+            com.Parameters.AddWithValue("@CodeSource", codeSource);    //@Username is an Input Parameter to the Proc
+
+            int response = -1;
+            try
+            {
+                using (con)
+                {
+                    con.Open();
+                    response = com.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            if (response == 1)
+            {
+                Debug.WriteLine("CodeSource Edited");
+            }
+            else
+            {
+                Debug.WriteLine("CodeSource Edit Failed");
+            }
+        }
 
     }
 }
