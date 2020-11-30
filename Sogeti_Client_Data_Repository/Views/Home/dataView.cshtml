@@ -1,10 +1,7 @@
 ﻿@using System.Collections.Generic
 @using System.Diagnostics;
 @{
-    ViewData["Title"] = "dataView";
-    getTableData getData = new getTableData();
-    List<dataTableEntry> data = new List<dataTableEntry>();
-    data = getData.getDataTableEntriesTest();
+
 }
 <style>
     tbody th:hover {
@@ -199,25 +196,25 @@
                     <tr>
                         <th class="col-0 hidden"> App ID</th>
                         <th class="col-1 hidden"> App Name</th>
-                        <th class="col-2 hidden"> Application Type</th>
-                        <th class="col-3 hidden"> Client </th>
-                        <th class="col-4 hidden"> Code Source</th>
-                        <th class="col-5 hidden"> Criticality</th>
-                        <th class="col-6 hidden"> Department</th>
-                        <th class="col-7 hidden"> Department Manager </th>
-                        <th class="col-8 hidden"> Devlopment Server</th>
-                        <th class="col-9 hidden"> Devlopment URL</th>
-                        <th class="col-10 hidden">Future Devlopment</th>
-                        <th class="col-11 hidden">Primary BA</th>
-                        <th class="col-12 hidden">Production Server</th>
-                        <th class="col-13 hidden">Production URL</th>
-                        <th class="col-14 hidden">QA Server</th>
-                        <th class="col-15 hidden">QA URL</th>
+                        <th class="col-2 hidden"> Department</th>
+                        <th class="col-3 hidden"> DepartmentManager </th>
+                        <th class="col-4 hidden"> Client</th>
+                        <th class="col-5 hidden"> PrimaryBA</th>
+                        <th class="col-6 hidden"> TechContact</th>
+                        <th class="col-7 hidden"> ApplicationType </th>
+                        <th class="col-8 hidden"> Tech</th>
+                        <th class="col-9 hidden"> ProductionServer</th>
+                        <th class="col-10 hidden">ProductionURL</th>
+                        <th class="col-11 hidden">QaServer</th>
+                        <th class="col-12 hidden">QaURL</th>
+                        <th class="col-13 hidden">DevlopmentServer</th>
+                        <th class="col-14 hidden">DevlopmentURL</th>
+                        <th class="col-15 hidden">CodeSource</th>
                         <th class="col-16 hidden">Repository</th>
-                        <th class="col-17 hidden">Sensitivity</th>
-                        <th class="col-18 hidden">Stability</th>
-                        <th class="col-19 hidden">Tech</th>
-                        <th class="col-20 hidden">Tech Contact</th>
+                        <th class="col-17 hidden">Stability</th>
+                        <th class="col-18 hidden">FutureDevlopment</th>
+                        <th class="col-19 hidden">Sensitivity</th>
+                        <th class="col-20 hidden">Criticality</th>
                     </tr>
                 </thead>
                 <tbody id="dataTableBody">
@@ -226,14 +223,21 @@
         </div>
 </body>
 <script>
-    var data = []
-    var entry1 = { App_ID: "2", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
-    var entry2 = { App_ID: "3", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" };
-    var entry3 = { App_ID: "4", App_name: "BugSmacker", ApplicationType: "", Client: "", CodeSource: "1", Criticality: "5", Department: "1", DepartmentManager: "", DevlopmentServer: "", DevlopmentURL: "", FutureDevlopment: "4", PrimaryBA: "", ProductionServer: "", ProductionURL: "", QaServer: "", QaURL: "", Repository: "1", Sensitivity: "1", Stability: "2", Tech: "", TechContact: "" }
-    data.push(entry1);
-    data.push(entry2);
-    data.push(entry3);
+    var data = [];
+    @{
+        ViewData["Title"] = "dataView";
+        getTableData getData = new getTableData();
+        List<dataTableEntry> data = new List<dataTableEntry>();
+        data = getData.getDataTableEntries(1);
 
+        foreach (dataTableEntry entry in data) {
+            <text>
+            var entry = { App_ID: '@entry.App_ID', App_name: '@entry.App_name', Department: '@entry.Department', DepartmentManager: '@entry.DepartmentManager', Client: '@entry.Client', PrimaryBA: '@entry.PrimaryBA', TechContact: '@entry.TechContact', ApplicationType: '@entry.ApplicationType', Tech: '@entry.Tech', ProductionServer: '@entry.ProductionServer', ProductionURL: '@entry.ProductionURL', QaServer: '@entry.QaServer', QaURL: '@entry.QaURL', DevlopmentServer: '@entry.DevlopmentServer', DevlopmentURL: '@entry.DevlopmentURL', CodeSource: '@entry.CodeSource', Repository: '@entry.Repository', Stability: '@entry.Stability', FutureDevlopment: '@entry.FutureDevlopment', Sensitivity: '@entry.Sensitivity', Criticality: '@entry.Criticality' };
+            data.push(entry);
+            </text>
+        }
+    }
+    console.log(data);
 
     // Find a <table> element with id="myTable":
     var table = document.getElementById("dataTableBody");
@@ -241,12 +245,13 @@
     data.forEach(function (value, i) {
         // Create an empty <tr> element and add it to the 1st position of the table:
         var row = table.insertRow();
-        row.setAttribute("id", `row-${value.App_ID}`); //Sets the row Id to the App ID 
+        row.setAttribute("id", `row-${value.App_ID}`); //Sets the row Id to the App ID
 
 
     // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
     Object.keys(value).forEach(function (k, i) {
         //Add the Cells and Data
+        console.log(k);
         var newCell = row.insertCell(-1);
         newCell.innerHTML = value[k].toString();
         newCell.setAttribute("class", `col-${i} hidden`);
@@ -272,7 +277,7 @@ document.querySelectorAll('.form-check-input').forEach(item => {
             var col = document.getElementsByClassName(`col-${item.value}`);
             console.log(col);
             for (let item2 of col) {
-                console.log(item2);
+                //console.log(item2);
                 item2.className = `col-${item.value} selected`;
             }
 
@@ -280,7 +285,7 @@ document.querySelectorAll('.form-check-input').forEach(item => {
         if (!item.checked) {
             var col = document.getElementsByClassName(`col-${item.value}`);
             for (let item2 of col) {
-                console.log(item2);
+                //console.log(item2);
                 item2.className = `col-${item.value} hidden`;
             }
         }
