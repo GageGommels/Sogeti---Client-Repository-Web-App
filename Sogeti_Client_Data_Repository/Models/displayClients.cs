@@ -7,6 +7,9 @@ using System.Diagnostics;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
+    /// <summary>
+    /// This class provides the back-end functionality for the ClientInfo view.
+    /// </summary>
     public class displayClients
     {
         SqlConnection con;
@@ -25,6 +28,14 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
+        /// <summary>
+        /// This method is called by the loadData function in the ClientInfo view.
+        /// It calls the get_ClientInfo stored procedure from the database, which
+        /// returns the clientID, clientName, and description of all clients. This
+        /// method converts what is returned from the stored procedure into a list 
+        /// of Client objects, which is subsequently returned by the method. 
+        /// </summary>
+        /// <returns> List<Client> </returns>
         public List<Client> getClientInfo()
         {
             List<Client> data = new List<Client>();
@@ -62,6 +73,14 @@ namespace Sogeti_Client_Data_Repository.Models
             return data;
         }
 
+        /// <summary>
+        /// This method is called by the getIdForClientApp method in the home controller class
+        /// to get information about a specified client based on the client id. The method calls
+        /// the get_ClientInfoFromID stored procedure, which returns the client name and description
+        /// of a client based on the client id. The method then creates and returns the client object.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> Client object </returns>
         public Client getAppClient(string id)
         {
             Client newClient = new Client();
@@ -93,6 +112,13 @@ namespace Sogeti_Client_Data_Repository.Models
             return newClient;
         }
 
+        /// <summary>
+        /// This method inserts a new client into the database. It takes a client
+        /// name and description as parameters, and calls the Insert_Client stored
+        /// procedure.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
         public void saveClient(string name, string description)
         {
             SqlCommand com = new SqlCommand("Insert_Client", con);
@@ -126,29 +152,6 @@ namespace Sogeti_Client_Data_Repository.Models
             {
                 Debug.WriteLine("client add failed");
             }
-
-            /*
-            try
-            {
-                using (con)
-                {
-                    con.Open();
-                    using (SqlDataReader sqlReader = com.ExecuteReader())
-                    {
-                        while (sqlReader.Read())
-                        {
-                            var id = sqlReader.GetString(0);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            { }
-            finally
-            {
-                con.Close();
-            }
-            */
         }
     }
 }

@@ -6,8 +6,16 @@
 }
 
 <script>
+    //global array of clientApplication objects used to populate the data in the table
     var clientApplications = [];
 
+    /*
+     * This function is called on page load. It calls the getClientApplications
+     * method in the displayClientApplications class, which invokes the stored procedure
+     * which returns a list of all ClientApplication objects in the database. The list
+     * is converted to a javascript array and the array is used to populate the
+     * table on this page.
+     */
     function loadData() {
          var table, row, cell, input;
 
@@ -23,13 +31,9 @@
                </text>
            }
         }
-        //appClientName = '@clientForApps.ClientName';
-        //appClientDescription = "@clientForApps.description";
 
         document.getElementById("clientNameBox").value = "@clientForApps.ClientName";
         document.getElementById("clientDescriptionBox").value = "@clientForApps.Description";
-        //console.log(appClientName);
-        //console.log(appClientDescription);
 
         table = document.getElementById("clientApplicationTable");
         for (i = 0; i < clientApplications.length; i++) {
@@ -50,6 +54,12 @@
             cell.appendChild(input);
         }
     }
+
+    /*
+     * This function creates a new row in the clientApplication table. It allows users
+     * to enter information into the cells, which can then be saved into the
+     * database by clicking the "save" button.
+     */
     function newApplication() {
         var table = document.getElementById("clientApplicationTable");
         var length = table.rows.length;
@@ -67,6 +77,14 @@
         cell1.appendChild(input1);
         cell2.appendChild(input2);
     }
+
+    /* 
+     * This function needs to be implemented. It should grab the information from the cells
+     * in the row created by the newApplication function and send a request to the back-end
+     * through an ajax call to call the stored procedure that creates a new application. This
+     * function should then redirect the user to the application page, where they can fill in the
+     * rest of the information needed about the application.
+     */
     function saveNewApplication() {
 
     }

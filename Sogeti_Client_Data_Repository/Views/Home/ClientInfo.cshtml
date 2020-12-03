@@ -3,10 +3,19 @@
     ViewData["Title"] = "ClientInfo";
 }
 <script>
+    //global array of client objects used to populate the data in the table
     var clientData = [];
+    //global variables that are updated when a new client is created
     var newClientName = "";
     var newDescription = "";
 
+    /*
+     * This function is called on page load. It calls the getClientInfo
+     * method in the displayClients class, which invokes the stored procedure
+     * which returns a list of all Client objects in the database. The list
+     * is converted to a javascript array and the array is used to populate the
+     * table on this page.
+     */
     function loadData() {
         var table, row, cell, input;
 
@@ -21,31 +30,9 @@
             </text>
             }
         }
-        console.log(clientData)
 
         table = document.getElementById("clientTable");
-        /*
-        clientData.forEach(function (i) {
-            var row = table.insertRow()
-            row.setAttribute("id", `row-${clientData[i].clientId}`)
-
-            k = 1;
-            Object.keys(value).forEach(function (k, i) {
-                var newCell = row.insertCell(0);
-                newCell.innerHTML = values[k].toString();
-
-            })
-        })
-
-        var rows = document.getElementById('clientTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-        for (i = 0; i < rows.length; i++) {
-            rows[i].onclick = function (m, i) {
-                console.log(this.id.replace("row-", "")); //Logs App ID
-                var tempId = this.id.replace("row-", ""); //Sets a variable to a App ID */
-               // window.location.href = '@Url.Action("getIdForClientApp", "Home")/' + tempId; //Calls A Href
-            //}
-        //}
-
+        
         for (i = 0; i < clientData.length; i++) {
             row = table.insertRow(table.length);
 
@@ -67,6 +54,11 @@
         }
 
     }
+    /*
+     * This function creates a new row in the client table. It allows users
+     * to enter information into the cells, which can then be saved into the
+     * database.
+     */
     function newClient() {
         var table = document.getElementById("clientTable");
         var length = table.rows.length;
@@ -87,6 +79,13 @@
         cell2.appendChild(input2);
     }
 
+    /*
+     * This function implements the client search functionality. It begins by grabbing
+     * the information the user entered in the search bar and deleting the rows currently
+     * in the table. It then compares the items in the search bar with the records in the
+     * clientData array. If there is a match, then the function redraws the row with the
+     * matched data.
+     */
     function searchForClient() {
         var clientToSearchFor = document.getElementById("clientToSearchFor").value;
         var descriptionToSearchFor = document.getElementById("descriptionToSearchFor").value;
@@ -120,6 +119,13 @@
             }
         }
     }
+
+    /*
+     * This function saves a new client to the database. It grabs the
+     * information entered by the user in the row created by the newClient function
+     * and sends it to the saveClient method in the displayClients class with an
+     * ajax call.
+     */
     function saveNewClient() {
         newClientName = document.getElementById("clientToBeAdded").value;
         newDescription = document.getElementById("clientDescriptionToBeAdded").value;
@@ -127,7 +133,6 @@
         console.log(newClientName);
         console.log(newDescription);
 
-        //window.location.href = 'Url.Action("saveClient", "Home")/' + newClientName + '/' + newDescription;
         $.ajax({
             type: "POST",
             url: "saveClient",

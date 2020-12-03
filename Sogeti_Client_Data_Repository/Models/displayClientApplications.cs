@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
+    /// <summary>
+    /// This class provides the back-end functionality for the ClientApplications view.
+    /// </summary>
     public class displayClientApplications
     {
         SqlConnection con;
@@ -24,6 +27,16 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
+        /// <summary>
+        /// This method is called by the loadData function in the ClientApplications view.
+        /// It calls the get_ApplicationAndProdURL stored procedure from the database, which
+        /// returns the application name and production url of all applications associated
+        /// with a specific client. This method converts what is returned from the stored
+        /// procedure into a list of ClientApplication objects, which is subsequently
+        /// returned by the method.
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <returns> List<ClientApplication> </returns>
         public List<ClientApplication> getClientApplications(string clientID)
         {
             List<ClientApplication> data = new List<ClientApplication>();
@@ -59,40 +72,6 @@ namespace Sogeti_Client_Data_Repository.Models
                 con.Close();
             }
             return data;
-        }
-
-        public Client getClientForApplications(string clientID)
-        {
-            Client clientForApps = new Client();
-            SqlCommand com = new SqlCommand("get_ClientInfoFromID", con);
-            com.CommandType = CommandType.StoredProcedure;
-            com.Parameters.AddWithValue("@ClientID", Int32.Parse(clientID));
-
-            try
-            {
-                using (con)
-                {
-                    con.Open();
-                    using (SqlDataReader sqlReader = com.ExecuteReader())
-                    {
-                        if (sqlReader.HasRows)
-                        {
-                            while (sqlReader.Read())
-                            {
-                                clientForApps.ClientName = sqlReader.GetString(0);
-                                clientForApps.Description = sqlReader.GetString(1);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            { }
-            finally
-            {
-                con.Close();
-            }
-            return clientForApps;
         }
     }
 }
