@@ -1,9 +1,136 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Sogeti_Client_Data_Repository.Models.userSearch
 @{
     ViewData["Title"] = "User Search";
 }
+
+<script>
+    var userData = [];
+    var newUserFirstName = "";
+
+    var newUserLastName = "";
+
+    var newUserName = "";
+
+    function loadInfo() {
+        var table, row, cell, input;
+
+        @{
+            userSearchInfo userData = new userSearchInfo();
+            List<userSearch> userList = userData.getUserInfo();
+
+            foreach (userSearch entry in userList) {
+            <text>
+        var entry = { userSearchId: '@entry.UserID', UserName: '@entry.UserName', UserFirstName: '@entry.UserFirstName', UserLastName: @entry.UserLastName };
+        userData.push(entry);
+            </text>
+            }
+        }
+        console.log(userData)
+
+        table = document.getElementById("userTable");
+
+
+        for (i = 0; i < userData.length; i++) {
+            row = table.insertRow(table.length);
+
+            cell = row.insertCell(0);
+            cell.setAttribute("class", "col-3");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = userData[i].UserName;
+            cell.appendChild(input);
+
+            cell = row.insertCell(1);
+            cell.setAttribute("class", "col-3");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = userData[i].UserFirstName;
+            cell.appendChild(input);
+
+            cell = row.insertCell(2);
+            cell.setAttribute("class", "col-3");
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = userData[i].UserLastName;
+            cell.appendChild(input);
+        }
+
+    }
+
+    function searchForUser() {
+        var userFirstNameToSearchFor = document.getElementById("firstNameUser").value;
+        var userLastNameToSearchFor = document.getElementById("lastNameUser").value;
+        var userNameToSearchFor = document.getElementById("nameUser").value;
+        table = document.getElementById("userTable");
+        table.innerHTML = "";
+
+        console.log(clientData.length);
+
+        for (i = 0; i < userData.length; i++) {
+            if (userData[i].UserFirstName.includes(userFirstNameToSearchFor)
+                || userData[i].UserLastName.includes(userLastNameToSearchFor)
+                || userData[i].UserName.includes(userNameToSearchFor)) {
+
+                console.log("true")
+
+                row = table.insertRow(table.length);
+
+                cell = row.insertCell(0);
+                cell.setAttribute("class", "col-3");
+                input = document.createElement('input');
+                input.type = 'text';
+                input.value = userData[i].UserName;
+                cell.appendChild(input);
+
+                cell = row.insertCell(1);
+                cell.setAttribute("class", "col-3");
+                input = document.createElement('input');
+                input.type = 'text';
+                input.value = userData[i].UserFirstName;
+                cell.appendChild(input);
+
+                cell = row.insertCell(2);
+                cell.setAttribute("class", "col-3");
+                input = document.createElement('input');
+                input.type = 'text';
+                input.value = userData[i].UserLastName;
+                cell.appendChild(input);
+            }
+        }
+    }
+
+    function saveUserSearch() {
+        newUserFirstName = document.getElementById("clientToBeAdded").value;
+        newUserLastName = document.getElementById("clientDescriptionToBeAdded").value;
+
+        console.log(newUserFirstName);
+        console.log(newUserLastName);
+        console.log(newUserName);
+
+        //window.location.href = 'Url.Action("saveClient", "Home")/' + newClientName + '/' + newDescription;
+        $.ajax({
+            type: "POST",
+            url: "saveUserSearch",
+            data: {
+                name: newUserFirstName,
+                name: newUserLastName,
+                name: newUserName,
+            },
+            dataType: "json",
+            success: function (response) {
+                alert("success");
+            },
+            failure: function (response) {
+                alert("failure");
+            },
+            error: function (response) {
+                alert("error");
+            }
+        })
+    }
+    }
+</script>
+
 
 <head>
     <style>
@@ -29,7 +156,7 @@
             }
     </style>
 </head>
-<body>
+<body onLoad="loadInfo()">
     <br>
     <br>
     <div class="container-fluid">
@@ -38,14 +165,16 @@
             <div class="col-md-8">
                 <form class="form-inline">
                     <div class="col-md-2">
-                        <input type="text" name="userFirstName" placeholder="User First Name">
+                        <input id =" firstNameUser"type="text" name="userFirstName" placeholder="User First Name">
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="userLastName" placeholder="User Last Name">
+                        <input id="lastNameUser" type="text" name="userLastName" placeholder="User Last Name">
                     </div>
-                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <input id ="nameUser" type="text" name="userName" placeholder="Username">
+                    </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-info btn-block"> Search </button>
+                        <button type="button" class="btn btn-info btn-block" onclick="searchForUser()" value="Search"> Search </button>
                     </div>
                 </form>
             </div>
@@ -62,52 +191,8 @@
                             <th scope="col" class="col-6">Usernames</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class="col-3">User First Name 1</td>
-                            <td scope="col" class="col-3">User Last Name 1</td>
-                            <td scope="col" class="col-3">Username 1</td>
-                        </tr>
+                    <tbody id ="userTable" >
+                      
                     </tbody>
                 </table>
             </div>
@@ -126,21 +211,3 @@
         </div>
     </div>
 </body>
-
-<script>
-    var userFirstName = document.querySelector("userFirstName");
-
-    userFirstName.addEventListener("keyup", function (b) {
-        var search_name = e.target.value.toLowerCase();
-        var search_nameInit = document.querySelectorAll(".table_body .name")
-
-        search_nameInit.forEach(function (item)){
-            if (item.textContent.toLowerCase().indexOf(userFirstName) != -1) {
-                item.closest("col").style.display = "block"
-            }
-            else {
-                item.closest("col").style.display = "none"
-            }
-        }
-    }
-</script>
