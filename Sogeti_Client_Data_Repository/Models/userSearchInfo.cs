@@ -43,14 +43,19 @@ namespace Sogeti_Client_Data_Repository.Models
                             while (sqlReader.Read())
                             {
                                 userSearch newUser = new userSearch();
-                                newUser.userID = sqlReader.GetInt32(0).ToString();
 
-                                newUser.userName = sqlReader.GetString(1);
+                                
+                                newUser.UserID = sqlReader.GetInt32(0).ToString();
 
+                                
+                                newUser.UserName = sqlReader.GetString(1);
+
+                                
                                 newUser.UserFirstName = sqlReader.GetString(2);
 
-                                newUser.UserLastName = sqlReader.GetString(3);
                                 
+                                newUser.UserLastName = sqlReader.GetString(3);
+
 
                                 data.Add(newUser);
                             }

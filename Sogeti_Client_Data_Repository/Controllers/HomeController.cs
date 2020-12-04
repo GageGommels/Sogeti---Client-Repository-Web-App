@@ -27,11 +27,10 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
-        public IActionResult displayClients()
-        {       
+        public IActionResult userSearch()
+        {
             return View();
         }
-
         public IActionResult ClientApplications()
         {
             return View();
@@ -96,7 +95,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 {
                     HttpContext.Session.SetString("user", login.Username);
                     TempData["msg"] = response;
-                    return View("Settings");
+                    return View("ClientInfo");
                 }
                 else
                 {
@@ -130,10 +129,6 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
         public IActionResult changePass()
-        {
-            return View();
-        }
-        public IActionResult test()
         {
             return View();
         }

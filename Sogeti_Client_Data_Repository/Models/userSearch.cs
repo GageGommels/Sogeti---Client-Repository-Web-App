@@ -7,12 +7,12 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class userSearch
     {
-        public string userFirstName;
+        private  string userFirstName;
 
-        public string userLastName;
+        private string userLastName;
 
-        public string userName;
-        public string userID;
+        private string userName;
+        private string userID;
 
 
         public userSearch() { }
