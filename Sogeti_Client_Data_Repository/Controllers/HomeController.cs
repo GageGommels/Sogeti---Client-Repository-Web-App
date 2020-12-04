@@ -37,6 +37,16 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        /// <summary>
+        /// This method allows the ClientInfo view to communicate with the ClientApplications
+        /// view. This method is called when a user clicks on a client name cell in the table.
+        /// It is passed a clientId variable, where it then calls the getAppClient method in the
+        /// displayClients class, using the clientId variable to get the client object associated
+        /// with that id. The client object is then passed to a ViewBag variable, where it is called
+        /// by the displayClientApplications view.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> ClientApplications view </returns>
         public IActionResult getIdForClientApp(string id)
         {
             displayClients clientInfo = new displayClients();
@@ -44,6 +54,13 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View("ClientApplications");
         }
 
+        /// <summary>
+        /// This method receives an ajax call from the saveNewClient function in the ClientInfo view.
+        /// It is passed a client name and description, which is then passed to the saveClient method
+        /// in the displayClients class to be saved in the database.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
         [HttpPost]
         public void saveClient(string name, string description)
         {
