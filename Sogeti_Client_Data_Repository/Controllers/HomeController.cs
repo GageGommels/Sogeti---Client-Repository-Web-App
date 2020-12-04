@@ -231,6 +231,14 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View("Application");
         }
 
+        ///Summary
+        ///This series of functions are the connection between the application page
+        ///and database procedure functions.
+        ///Each of these functions names are the same as the ones in getDataTable.cs
+        ///and Application.cshtml.
+        ///Each method simply takes in identical variables from Application.cshtml
+        ///and passses them to the functions in getDataTable.cs
+
         [HttpPost]
         public void editDept(int ID, string dept, string first, string last)
         {
