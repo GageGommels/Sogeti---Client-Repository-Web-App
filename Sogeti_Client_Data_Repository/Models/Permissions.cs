@@ -7,10 +7,12 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class Permissions
     {
+        //Permission class variables
         public string userFullName;
         public string userName;
         public string userID;
         public string userEmail;
+
 
         public Permissions() { }
 

@@ -10,6 +10,10 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class CachedTables
     {
+        /// <summary>
+        /// These are dictionaries that can be reference to convert the integer type from the database
+        /// to the string type.
+        /// </summary>
         public static Dictionary<int, string> DevelopmentRating = new Dictionary<int, string>();
         public static Dictionary<int, string> Repository = new Dictionary<int, string>();
         public static Dictionary<int, string> Stability = new Dictionary<int, string>();
@@ -20,6 +24,7 @@ namespace Sogeti_Client_Data_Repository.Models
         public static Dictionary<int, string> CodeSource = new Dictionary<int, string>();
         SqlConnection con;
 
+        //Constructor for the cached tables class
         private CachedTables()
         {
             var config = GetConfiguration();
@@ -27,8 +32,13 @@ namespace Sogeti_Client_Data_Repository.Models
             GetCachedTables();
         }
 
+        
         public static CachedTables Instance { get; } = new CachedTables();
 
+        /// <summary>
+        /// Created the Configuration for the stored procedure on the database
+        /// </summary>
+        /// <returns>IConfigurationRoot</returns>
         public IConfigurationRoot GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
@@ -38,6 +48,9 @@ namespace Sogeti_Client_Data_Repository.Models
             return builder.Build();
         }
 
+        /// <summary>
+        /// This method calls the Get_CachedTables Stored procedure, which is used to fill up the dictionaries in this cached tables class
+        /// </summary>
         public void GetCachedTables()
         {
             SqlCommand com = new SqlCommand("Get_CachedTables", con);       //Check_Password is the name of the Stored Procedure

@@ -7,6 +7,7 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class dataTableEntry
     {
+        //Variables
         int app_ID;
         String app_name;
         String department;

@@ -9,6 +9,7 @@ namespace Sogeti_Client_Data_Repository.Models
 {
     public class Login
     {
+        //Variables for the login methon the database.
         [BindProperty, Required, MinLength(6)]
         public string Username { get; set; }
 
