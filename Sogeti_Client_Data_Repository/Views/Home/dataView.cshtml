@@ -1,7 +1,7 @@
 ﻿@using System.Collections.Generic
 @using System.Diagnostics;
 @{
-
+    ViewData["Title"] = "dataView";
 }
 <style>
     tbody th:hover {
@@ -225,19 +225,38 @@
 <script>
     var data = [];
     @{
-        ViewData["Title"] = "dataView";
         getTableData getData = new getTableData();
         List<dataTableEntry> data = new List<dataTableEntry>();
         data = getData.getDataTableEntries(1);
 
         foreach (dataTableEntry entry in data) {
             <text>
-            var entry = { App_ID: '@entry.App_ID', App_name: '@entry.App_name', Department: '@entry.Department', DepartmentManager: '@entry.DepartmentManager', Client: '@entry.Client', PrimaryBA: '@entry.PrimaryBA', TechContact: '@entry.TechContact', ApplicationType: '@entry.ApplicationType', Tech: '@entry.Tech', ProductionServer: '@entry.ProductionServer', ProductionURL: '@entry.ProductionURL', QaServer: '@entry.QaServer', QaURL: '@entry.QaURL', DevlopmentServer: '@entry.DevlopmentServer', DevlopmentURL: '@entry.DevlopmentURL', CodeSource: '@entry.CodeSource', Repository: '@entry.Repository', Stability: '@entry.Stability', FutureDevlopment: '@entry.FutureDevlopment', Sensitivity: '@entry.Sensitivity', Criticality: '@entry.Criticality' };
+    var entry = {
+        App_ID: '@entry.App_ID',
+        App_name: '@entry.App_name',
+        Department: '@entry.Department',
+        DepartmentManager: '@entry.DepartmentManager',
+        Client: '@entry.Client',
+        PrimaryBA: '@entry.PrimaryBA',
+        TechContact: '@entry.TechContact',
+        ApplicationType: '@entry.ApplicationType',
+        Tech: '@entry.Tech',
+        ProductionServer: '@entry.ProductionServer',
+        ProductionURL: '@entry.ProductionURL',
+        QaServer: '@entry.QaServer',
+        QaURL: '@entry.QaURL',
+        DevlopmentServer: '@entry.DevlopmentServer',
+        DevlopmentURL: '@entry.DevlopmentURL', CodeSource: '@entry.CodeSource',
+        Repository: '@entry.Repository',
+        Stability: '@entry.Stability',
+        FutureDevlopment: '@entry.FutureDevlopment',
+        Sensitivity: '@entry.Sensitivity',
+        Criticality: '@entry.Criticality'
+    };
             data.push(entry);
             </text>
         }
     }
-    console.log(data);
 
     // Find a <table> element with id="myTable":
     var table = document.getElementById("dataTableBody");
