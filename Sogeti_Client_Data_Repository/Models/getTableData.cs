@@ -18,6 +18,10 @@ namespace Sogeti_Client_Data_Repository.Models
             con = new SqlConnection(config.GetSection("Data").GetSection("ConnectionString").Value);
         }
 
+        /// <summary>
+        /// Sets up the connection string for the SQL client
+        /// </summary>
+        /// <returns> IConfigurationRoot </returns>
         public IConfigurationRoot GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
@@ -26,12 +30,19 @@ namespace Sogeti_Client_Data_Repository.Models
                 .AddEnvironmentVariables();
             return builder.Build();
         }
-
+        /// <summary>
+        /// This class is used for making calls to the database to edit and or add an application. The application object is large, and we wanted to have a dedicated class for making these calls.
+        /// </summary>
+        /// <param name="clientIDparm"></param>
+        /// <returns> List<dataTableEntry> data </returns>
         public List<dataTableEntry> getDataTableEntries(int clientIDparm) {
+            //Create a Array List to store the data
             List<dataTableEntry> data = new List<dataTableEntry>();
-
+            //make a new SQL Connection
             SqlCommand com = new SqlCommand("Get_AllApplicationsByUserID", con);
+            //Set Command Type to stored procedures
             com.CommandType = CommandType.StoredProcedure;
+            //Add the User ID as a parameter
             com.Parameters.AddWithValue("@UserID", 1);
 
             try
@@ -47,8 +58,10 @@ namespace Sogeti_Client_Data_Repository.Models
                             {
                                 while (sqlReader.Read())
                                 {
+                                    //Make new DateTable Entry Object
                                     dataTableEntry newEntry = new dataTableEntry();
 
+                                    //Read in the response to the object
                                     newEntry.App_ID = (int)sqlReader["ApplicationID"];
                                     newEntry.App_name = (string)sqlReader["ApplicationName"];
                                     newEntry.Department = (string)sqlReader["DepartmentName"];
@@ -77,10 +90,12 @@ namespace Sogeti_Client_Data_Repository.Models
                         }
                     }
 
+                    //Make Get_ApplicationServerData call to the server to fill in the object
                     foreach (dataTableEntry entry in data)
                     {
                         try
                         {
+                            //Set up the Stored Procedure connection
                             SqlCommand com2 = new SqlCommand("Get_ApplicationServers", con);
                             com2.CommandType = CommandType.StoredProcedure;
                             com2.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
@@ -112,10 +127,12 @@ namespace Sogeti_Client_Data_Repository.Models
                         }
                     }
 
+                    //Make the Get_ApplicationContacts call to the server
                     foreach (dataTableEntry entry in data)
                     {
                         try
                         {
+                            //Setup the Stored Procedure call to the database.
                             SqlCommand com3 = new SqlCommand("Get_ApplicationContacts", con);
                             com3.CommandType = CommandType.StoredProcedure;
                             com3.Parameters.AddWithValue("@ApplicationID", entry.App_ID);
@@ -146,6 +163,7 @@ namespace Sogeti_Client_Data_Repository.Models
                         }
                     }
 
+                    //Make the Get_ApplicationUrl to the database
                     foreach (dataTableEntry entry in data)
                     {
                         try
@@ -193,45 +211,10 @@ namespace Sogeti_Client_Data_Repository.Models
             {
                 Debug.WriteLine(entry.App_name + " || " + entry.App_ID + " || " + entry.PrimaryBA + " || " + entry.TechContact);
             }
+            //return the array list
             return data;
         }
 
-        public List<dataTableEntry> getDataTableEntriesTest()
-        {
-            List<dataTableEntry> data = new List<dataTableEntry>();
-            //dataTableEntry newEntry = new dataTableEntry("App Name 1", "Department 1", "Gage Gommels", "Microsoft", "BA 1", "Scott Van", "Web App", "Java Script", "PS 1", "URL 1", "QAS 1", "QA URL 1", "DevS 1", "DevURL 1", "Code Source 1", "Repo 1", "High", "Medium", "low", "low", "1");
-            //dataTableEntry newEntry2 = new dataTableEntry("App Name 2", "Department 2", "Eric Kim", "Google", "BA 2", "Ethan C", "Windows App", "C#", "PS 2", "URL 2", "QAS 2", "QA URL 2", "DevS 2", "DevURL 2", "Code Source 2", "Repo 3", "Low", "low", "Medium", "medium", "2");
-            //dataTableEntry newEntry3 = new dataTableEntry("App Name 3", "Department 3", "Brian Zan", "FaceBook", "BA 3", "James M", "Web App", "Java Script", "PS 3", "URL 3", "QAS 3", "QA URL 3", "DevS 3", "DevURL 3", "Code Source 3", "Repo 3", "High", "High", "Medium", "High", "3");
-
-            //data.Add(newEntry);
-            //data.Add(newEntry2);
-            //data.Add(newEntry3);
-
-            //foreach (dataTableEntry entry in data) { Debug.WriteLine(entry.App_ID); }
-
-            return data;
-        }
-
-        public dataTableEntry testData(int ID)
-        {
-            if (ID == 1)
-            {
-                dataTableEntry newEntry = new dataTableEntry("App Name 1", "Department 1", "Gage Gommels", "Microsoft", "BA 1", "Scott Van", "Web App", "Java Script", "PS 1", "URL 1", "QAS 1", "QA URL 1", "DevS 1", "DevURL 1", "Code Source 1", "Repo 1", "High", "Medium", "low", "low", 1);
-                return newEntry;
-            }
-            else if (ID == 2)
-            {
-                dataTableEntry newEntry2 = new dataTableEntry("App Name 2", "Department 2", "Eric Kim", "Google", "BA 2", "Ethan C", "Windows App", "C#", "PS 2", "URL 2", "QAS 2", "QA URL 2", "DevS 2", "DevURL 2", "Code Source 2", "Repo 3", "Low", "low", "Medium", "medium", 2);
-                return newEntry2;
-            }
-            else if (ID == 3) {
-                dataTableEntry newEntry3 = new dataTableEntry("App Name 3", "Department 3", "Brian Zan", "FaceBook", "BA 3", "James M", "Web App", "Java Script", "PS 3", "URL 3", "QAS 3", "QA URL 3", "DevS 3", "DevURL 3", "Code Source 3", "Repo 3", "High", "High", "Medium", "High", 3);
-                return newEntry3;
-            }
-            dataTableEntry newEntry4 = new dataTableEntry("App Name 1", "Department 1", "Gage Gommels", "Microsoft", "BA 1", "Scott Van", "Web App", "Java Script", "PS 1", "URL 1", "QAS 1", "QA URL 1", "DevS 1", "DevURL 1", "Code Source 1", "Repo 1", "High", "Medium", "low", "low", 1);
-            return newEntry4;
-
-        }
         public void editDept(int ID, string dept, string first, string last)
         {
             SqlCommand com = new SqlCommand("Update_Department", con);

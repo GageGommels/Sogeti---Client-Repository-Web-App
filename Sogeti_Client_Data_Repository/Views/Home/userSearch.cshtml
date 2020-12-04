@@ -1,8 +1,12 @@
 ﻿@model Sogeti_Client_Data_Repository.Models.userSearch
 @{
-    ViewData["Title"] = "User Search";
+    ViewData["Title"] = "userSearch";
 }
-
+<style>
+    input, input:focus, textarea:focus, select:focus {
+        border: none;
+    }
+</style>
 <script>
     var userData = [];
     var newUserFirstName = "";
@@ -20,15 +24,17 @@
 
             foreach (userSearch entry in userList) {
             <text>
-        var entry = { userSearchId: '@entry.UserID', UserName: '@entry.UserName', UserFirstName: '@entry.UserFirstName', UserLastName: @entry.UserLastName };
-        userData.push(entry);
+                var entry = { userSearchId: '@entry.UserID', UserName: '@entry.UserName', UserFirstName: '@entry.UserFirstName', UserLastName: '@entry.UserLastName' };
+                userData.push(entry);
             </text>
             }
         }
-        console.log(userData)
+        console.log(userData);
+    }
 
+    function drawTable() {
         table = document.getElementById("userTable");
-
+        table.innerHTML = "";
 
         for (i = 0; i < userData.length; i++) {
             row = table.insertRow(table.length);
@@ -37,41 +43,44 @@
             cell.setAttribute("class", "col-3");
             input = document.createElement('input');
             input.type = 'text';
-            input.value = userData[i].UserName;
+            input.value = userData[i].UserFirstName;
             cell.appendChild(input);
 
             cell = row.insertCell(1);
             cell.setAttribute("class", "col-3");
             input = document.createElement('input');
             input.type = 'text';
-            input.value = userData[i].UserFirstName;
+            input.value = userData[i].UserLastName;
             cell.appendChild(input);
 
             cell = row.insertCell(2);
-            cell.setAttribute("class", "col-3");
+            cell.setAttribute("class", "col-6");
             input = document.createElement('input');
             input.type = 'text';
-            input.value = userData[i].UserLastName;
+            input.value = userData[i].UserName;
             cell.appendChild(input);
         }
-
     }
 
     function searchForUser() {
-        var userFirstNameToSearchFor = document.getElementById("firstNameUser").value;
-        var userLastNameToSearchFor = document.getElementById("lastNameUser").value;
-        var userNameToSearchFor = document.getElementById("nameUser").value;
+        var userFirstNameToSearchFor = "";
+        var userLastNameToSearchFor = "";
+        var userNameToSearchFor = "";
+        userFirstNameToSearchFor = document.getElementById("firstNameUser").value;
+        userLastNameToSearchFor = document.getElementById("lastNameUser").value;
+        userNameToSearchFor = document.getElementById("nameUser").value;
         table = document.getElementById("userTable");
         table.innerHTML = "";
 
-        console.log(clientData.length);
-
         for (i = 0; i < userData.length; i++) {
-            if (userData[i].UserFirstName.includes(userFirstNameToSearchFor)
-                || userData[i].UserLastName.includes(userLastNameToSearchFor)
-                || userData[i].UserName.includes(userNameToSearchFor)) {
+            if ((userData[i].UserFirstName == userFirstNameToSearchFor)
+                || (userData[i].UserLastName == userLastNameToSearchFor)
+                || (userData[i].UserName == userNameToSearchFor)) {
 
-                console.log("true")
+
+                console.log(userData[i]);
+                console.log(userLastNameToSearchFor);
+                console.log((userData[i].UserLastName == userLastNameToSearchFor));
 
                 row = table.insertRow(table.length);
 
@@ -79,22 +88,27 @@
                 cell.setAttribute("class", "col-3");
                 input = document.createElement('input');
                 input.type = 'text';
-                input.value = userData[i].UserName;
+                input.value = userData[i].UserFirstName;
                 cell.appendChild(input);
 
                 cell = row.insertCell(1);
                 cell.setAttribute("class", "col-3");
                 input = document.createElement('input');
                 input.type = 'text';
-                input.value = userData[i].UserFirstName;
+                input.value = userData[i].UserLastName;
                 cell.appendChild(input);
 
                 cell = row.insertCell(2);
-                cell.setAttribute("class", "col-3");
+                cell.setAttribute("class", "col-6");
                 input = document.createElement('input');
                 input.type = 'text';
-                input.value = userData[i].UserLastName;
+                input.value = userData[i].UserName;
                 cell.appendChild(input);
+            } else {
+                console.log('Else: ');
+                console.log(userData[i].UserLastName);
+                console.log(userLastNameToSearchFor);
+                console.log((userData[i].UserLastName == userLastNameToSearchFor));
             }
         }
     }
@@ -128,10 +142,7 @@
             }
         })
     }
-    }
 </script>
-
-
 <head>
     <style>
         .table-fixed tbody {
@@ -165,7 +176,7 @@
             <div class="col-md-8">
                 <form class="form-inline">
                     <div class="col-md-2">
-                        <input id =" firstNameUser"type="text" name="userFirstName" placeholder="User First Name">
+                        <input id ="firstNameUser"type="text" name="userFirstName" placeholder="User First Name">
                     </div>
                     <div class="col-md-2">
                         <input id="lastNameUser" type="text" name="userLastName" placeholder="User Last Name">
@@ -175,6 +186,9 @@
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-info btn-block" onclick="searchForUser()" value="Search"> Search </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn-block" onclick="drawTable()"> Clear </button>
                     </div>
                 </form>
             </div>
@@ -211,3 +225,10 @@
         </div>
     </div>
 </body>
+
+<script>
+
+    window.addEventListener('load', function () {
+        drawTable();
+    })
+</script>

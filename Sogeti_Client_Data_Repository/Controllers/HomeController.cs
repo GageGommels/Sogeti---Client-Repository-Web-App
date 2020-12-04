@@ -22,16 +22,28 @@ namespace Sogeti_Client_Data_Repository.Controllers
             cachedTables = CachedTables.Instance;
         }
 
+        /// <summary>
+        /// Returns the Client Info View
+        /// </summary>
+        /// <returns>returns ClientInfo.cshtml View</returns>
         public IActionResult ClientInfo()
         {
             return View();
         }
 
-        public IActionResult displayClients()
-        {       
+        /// <summary>
+        /// This returns the userSearch View
+        /// </summary>
+        /// <returns>returns the userSearch.cshtml view</returns>
+        public IActionResult userSearch()
+        {
             return View();
         }
 
+        /// <summary>
+        /// Returns the Client Applications View
+        /// </summary>
+        /// <returns>returns ClientApplications.cshtml View</returns>
         public IActionResult ClientApplications()
         {
             return View();
@@ -86,6 +98,17 @@ namespace Sogeti_Client_Data_Repository.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// This method is called when a user attempts to login to the application.
+        /// It checks to make sure that the ModelState is valid then either returns the view of the Client Info Page
+        /// If it fails it returns the failed response to the loginpage letting the user know that the login was not succesful
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>
+        /// Success -> Sends ClientInfo Page
+        /// ||| Failure -> Sends Response to login page
+        /// </returns>
         [HttpPost]
         public IActionResult Login([Bind] Login login)
         {
@@ -96,7 +119,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 {
                     HttpContext.Session.SetString("user", login.Username);
                     TempData["msg"] = response;
-                    return View("Settings");
+                    return View("ClientInfo");
                 }
                 else
                 {
@@ -116,28 +139,49 @@ namespace Sogeti_Client_Data_Repository.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Returns the Application View 
+        /// </summary>
+        /// <returns>returns Application.cshtml</returns>
         public IActionResult Application()
         {
             return View();
         }
 
+        /// <summary>
+        /// Returns ForgotPasswordView
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ForgotPassword()
         {
             return View();
         }
+
+        /// <summary>
+        /// Returns the DataView Table Page
+        /// </summary>
+        /// <returns>returns dataView.cshtml View</returns>
         public IActionResult dataView()
         {
             return View();
         }
+
+        /// <summary>
+        /// Returns the Change Password View
+        /// </summary>
+        /// <returns>returns changePass.cshtml View</returns>
         public IActionResult changePass()
         {
             return View();
         }
-        public IActionResult test()
-        {
-            return View();
-        }
 
+
+
+        /// <summary>
+        /// This method is to check and see if the password of the user is successfully changed. If it is then it redirects the user to the index page, where they can then login.
+        /// </summary>
+        /// <param name="change"></param>
+        /// <returns>IActionResult index.cshtml view</returns>
         [HttpPost]
         public IActionResult changePass([Bind] ChangePassword change)
         {
@@ -148,7 +192,7 @@ namespace Sogeti_Client_Data_Repository.Controllers
                 if (response == "Password Successfully Changed")
                 {
                     TempData["msg"] = response;
-                    return View("test");
+                    return View("Index");
                 }
                 else
                 {
@@ -162,11 +206,20 @@ namespace Sogeti_Client_Data_Repository.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns the Sorting Page View
+        /// </summary>
+        /// <returns>IActionResult Sorting View</returns>
         public IActionResult Sorting()
         {
             return View();
         }
 
+        /// <summary>
+        /// Returns the application view with the application ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> Returns application view and ID of selected application </returns>
         public IActionResult check(int id)
         {
             getTableData getData = new getTableData();

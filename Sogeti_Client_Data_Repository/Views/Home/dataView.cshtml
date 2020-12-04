@@ -223,14 +223,21 @@
         </div>
 </body>
 <script>
+    //This array is for adding the JSON Objects too after they are parsed from the array list.
     var data = [];
     @{
+        //Object Constructor to get the data from the database
         getTableData getData = new getTableData();
+        //List for storing that data inside.
         List<dataTableEntry> data = new List<dataTableEntry>();
+        //Make the data call to get the entries. The parameter for getDataTableEntires is the User_ID(). It is hardcoded at 1 for demo purposes.
+        //Ideally we would pull the user_ID from a session State, but this was not implimented as of yet.
         data = getData.getDataTableEntries(1);
 
+        //Iterate through Array List
         foreach (dataTableEntry entry in data) {
             <text>
+        //Make a new JSON Object based on the data in the array list.
     var entry = {
         App_ID: '@entry.App_ID',
         App_name: '@entry.App_name',
@@ -253,11 +260,15 @@
         Sensitivity: '@entry.Sensitivity',
         Criticality: '@entry.Criticality'
     };
+
+            //Push the data to the data List
             data.push(entry);
             </text>
         }
     }
 
+
+    //Draw Table Block
     // Find a <table> element with id="myTable":
     var table = document.getElementById("dataTableBody");
 
@@ -279,6 +290,7 @@
 });
 
 
+//Select Block
 var rows = document.getElementById('dataTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 for (i = 0; i < rows.length; i++) {
     rows[i].onclick = function (m, i) {
@@ -288,10 +300,15 @@ for (i = 0; i < rows.length; i++) {
     }
 }
 
+
+//Headers Block
 var headers = [];
 
-document.querySelectorAll('.form-check-input').forEach(item => {
-    item.addEventListener('click', event => {
+    //Select all checkboxes
+    document.querySelectorAll('.form-check-input').forEach(item => {
+    //add onclick event listener
+        item.addEventListener('click', event => {
+        //Check if the Item is check or not.
         if (item.checked) {
             var col = document.getElementsByClassName(`col-${item.value}`);
             console.log(col);
