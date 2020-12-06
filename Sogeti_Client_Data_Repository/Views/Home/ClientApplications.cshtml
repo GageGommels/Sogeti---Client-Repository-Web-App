@@ -4,7 +4,11 @@
     Client clientForApps = new Client();
     clientForApps = ViewBag.SelectedClient;
 }
-
+<style>
+    input, input:focus, textarea:focus, select:focus {
+        border: none;
+    }
+</style>
 <script>
     //global array of clientApplication objects used to populate the data in the table
     var clientApplications = [];
@@ -140,8 +144,8 @@
                 <table class="table table-bordered table-hover table-fixed">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-4">Application Name </th>
-                            <th scope="col" class="col-8">Production URL </th>
+                            <th scope="col" class="col-3">Application Name </th>
+                            <th scope="col" class="col-9">Production URL </th>
                         </tr>
                     </thead>
                     <tbody id="clientApplicationTable">
