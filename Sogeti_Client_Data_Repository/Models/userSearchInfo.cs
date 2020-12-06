@@ -36,6 +36,7 @@ namespace Sogeti_Client_Data_Repository.Models
             List<userSearch> data = new List<userSearch>();
 
             SqlCommand com = new SqlCommand("Get_UserInfo", con);
+
             com.CommandType = CommandType.StoredProcedure;
 
             try
