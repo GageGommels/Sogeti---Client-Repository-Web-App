@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace Sogeti_Client_Data_Repository.Models
 {
+    /*
+     * The userSearch class creates variables userFirstName, userLastName, 
+     * userName, and userID which are called in the userSearchInfo class to 
+     * be displayed in the view page
+     */
     public class userSearch
     {
         public string userFirstName;

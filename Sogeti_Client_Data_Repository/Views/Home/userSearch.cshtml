@@ -4,7 +4,9 @@
 }
 
 <script>
+   //The global array used to populate the data in the user table
     var userData = [];
+    // The global variables used to store the called data from database into the table
     var newUserFirstName = "";
 
     var newUserLastName = "";
@@ -12,6 +14,11 @@
     var newUserName = "";
 
     function loadInfo() {
+    /*
+    * This function loads the data into a list using the method 
+    * getUserInfo() and populates the table with said information
+    *
+    */
         var table, row, cell, input;
 
         @{
@@ -57,6 +64,11 @@
 
     }
 
+    /*
+     * This function searches for users using the global variables and user inputs, deleting
+     * the table entries and searching through the array list for the desired information 
+     * and outputs the data in the view table while hiding the unspecified data
+     */
     function searchForUser() {
         var userFirstNameToSearchFor = document.getElementById("firstNameUser").value;
         var userLastNameToSearchFor = document.getElementById("lastNameUser").value;
@@ -99,6 +111,11 @@
         }
     }
 
+    /*
+     * This function saves the user data into the database. Using an ajax, 
+     * it saves the inputted information and stores it into the database through
+     * the userSearchInfo class
+     */
     function saveUserSearch() {
         newUserFirstName = document.getElementById("clientToBeAdded").value;
         newUserLastName = document.getElementById("clientDescriptionToBeAdded").value;

@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 namespace Sogeti_Client_Data_Repository.Models
 {
+    /*
+     * This class connects the backend database to the viewpage
+     */ 
     public class userSearchInfo
     {
         SqlConnection con;
@@ -23,7 +26,11 @@ namespace Sogeti_Client_Data_Repository.Models
                 .AddEnvironmentVariables();
             return builder.Build();
         }
-
+        /*
+         * This function retrieves the data from the database and is called in the view page
+         * returning the userID, userFirstName, userLastName, and userName converting them
+         * into a list
+         */
         public List<userSearch> getUserInfo()
         {
             List<userSearch> data = new List<userSearch>();
